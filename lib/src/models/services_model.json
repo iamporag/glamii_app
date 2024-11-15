@@ -1,0 +1,21 @@
+{
+    "service_title":"",
+    "service_description": "",
+    "service_price":30.00,
+    "service_vatSd" : 10.00,
+    "service_categoryId": "1",
+    "duration":"",
+    "image_gallery":[
+        {
+            "title":"",
+            "imageUrl":""
+        }
+    ],
+    "service_review":"",
+    "isFeature": true,
+    "isFavourite":true,
+    "isBooked": true,
+    "service_appoinment": "",
+    "provider":""
+}
+
