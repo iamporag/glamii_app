@@ -137,6 +137,8 @@
 
 
 
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 
 class ServicesScreen extends StatelessWidget {
@@ -169,14 +171,14 @@ class ServicesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title:const Text(
           'Services',
           style: TextStyle(
             fontFamily: 'GiazaStencil',
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color(0xFF75140C),
+        backgroundColor:const Color(0xFF75140C),
         centerTitle: true,
       ),
       body: ListView.builder(
@@ -190,7 +192,7 @@ class ServicesScreen extends StatelessWidget {
             ),
             title: Text(
               services[index]['title']!,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'GiazaStencil',
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -206,7 +208,7 @@ class ServicesScreen extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            trailing: Icon(Icons.arrow_forward_ios),
+            trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               // Navigate to Service Details Page
               Navigator.push(
@@ -226,7 +228,7 @@ class ServicesScreen extends StatelessWidget {
 class ServiceDetailScreen extends StatelessWidget {
   final Map<String, String> service;
 
-  ServiceDetailScreen({required this.service});
+  const ServiceDetailScreen({super.key, required this.service});
 
   @override
   Widget build(BuildContext context) {
@@ -234,12 +236,12 @@ class ServiceDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           service['title']!,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'GiazaStencil',
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color(0xFF75140C),
+        backgroundColor: const Color(0xFF75140C),
         centerTitle: true,
       ),
       body: Padding(
@@ -256,35 +258,35 @@ class ServiceDetailScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // Service Title
             Text(
               service['title']!,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'GiazaStencil',
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF75140C),
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             // Service Price and Duration
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                   'Price: ${service['price']}',
-                  style: TextStyle(
+                  style:const TextStyle(
                     fontFamily: 'TTChocolates',
                     fontSize: 18,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 Text(
                   'Duration: ${service['duration']}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'TTChocolates',
                     fontSize: 18,
                     color: Colors.black,
@@ -293,7 +295,7 @@ class ServiceDetailScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // Service Description
             Text(
               service['description']!,
@@ -303,13 +305,13 @@ class ServiceDetailScreen extends StatelessWidget {
                 color: Colors.grey[600],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // Booking Button
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF75140C),
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 12),
+                  backgroundColor: const Color(0xFF75140C),
+                  padding:const EdgeInsets.symmetric(horizontal: 50, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -317,7 +319,7 @@ class ServiceDetailScreen extends StatelessWidget {
                 onPressed: () {
                   // Navigate to booking screen
                 },
-                child: Text(
+                child: const Text(
                   'Book Now',
                   style: TextStyle(
                     fontFamily: 'GiazaStencil',

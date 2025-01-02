@@ -58,13 +58,13 @@ class AppointmentDetailScreen extends StatelessWidget {
             ),
             Text(
               'Time: ${appointment['time']}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'TTChocolates',
                 fontSize: 18,
                 color: Colors.black,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // Status
             Text(

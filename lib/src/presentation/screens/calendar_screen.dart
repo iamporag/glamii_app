@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
@@ -5,6 +7,8 @@ import 'package:intl/intl.dart';
 import 'appointment_detail_screen.dart';
 
 class CalendarScreen extends StatefulWidget {
+  const CalendarScreen({super.key});
+
   @override
   _CalendarScreenState createState() => _CalendarScreenState();
 }
@@ -75,7 +79,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color(0xFF75140C),
+        backgroundColor: const Color(0xFF75140C),
         centerTitle: true,
       ),
       body: Column(
@@ -112,7 +116,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ),
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           // Upcoming Appointments
           Expanded(
             child: Padding(
@@ -122,19 +126,19 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 children: [
                   Text(
                     'Appointments on ${DateFormat('MMMM dd, yyyy').format(_selectedDay)}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'GiazaStencil',
                       fontSize: 20,
                       color: Color(0xFF75140C),
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Expanded(
                     child: ListView(
                       children: _getAppointmentsForDay(_selectedDay).isEmpty
                           ? [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
                                 child: Text(
                                   'No appointments for this day',
                                   style: TextStyle(

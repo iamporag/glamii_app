@@ -207,7 +207,7 @@ class FeaturedServiceDetailScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        margin: EdgeInsets.symmetric(
+        margin: const EdgeInsets.symmetric(
           horizontal: 16.0,
           vertical: 20.0,
         ),

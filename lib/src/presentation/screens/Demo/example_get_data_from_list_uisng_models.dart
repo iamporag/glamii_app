@@ -6,22 +6,22 @@ import '../../../utils/dummy_data.dart';
 class CompanyScreen extends StatelessWidget {
   final String companyId;
 
-  CompanyScreen({required this.companyId});
+  const CompanyScreen({super.key, required this.companyId});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Company Details'),
+        title: const Text('Company Details'),
       ),
       body: FutureBuilder<ProviderModel?>(
         future: Future.delayed(
-          Duration(seconds: 1), // Simulating async data fetching
+         const Duration(seconds: 1), // Simulating async data fetching
           () => getProviderById(companyId),
         ),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.hasError) {
@@ -29,7 +29,7 @@ class CompanyScreen extends StatelessWidget {
           }
 
           if (!snapshot.hasData) {
-            return Center(child: Text('Company not found'));
+            return const Center(child: Text('Company not found'));
           }
 
           final company = snapshot.data!;
@@ -41,19 +41,19 @@ class CompanyScreen extends StatelessWidget {
               children: [
                 Text(
                   company.providerTitle,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   company.providerDescription,
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
-                SizedBox(height: 16),
-                Text(
+               const SizedBox(height: 16),
+                const Text(
                   'Available Jobs:',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Expanded(
                   child: ListView.builder(
                     itemCount: company.availableServices.length,

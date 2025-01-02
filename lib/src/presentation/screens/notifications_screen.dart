@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, prefer_final_fields
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -152,9 +152,9 @@ class NotificationsScreen extends StatelessWidget {
                     color: Colors.grey[600],
                   ),
                 ),
-                trailing: Text(
+                trailing: const Text(
                   "+200",
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'TTChocolates',
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

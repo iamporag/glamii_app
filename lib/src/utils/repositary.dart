@@ -1,5 +1,3 @@
-import 'package:glamii_app/src/models/provider_model.dart';
-import 'package:glamii_app/src/utils/dummy_data.dart';
 
 class Company {
   final String id;

@@ -1,35 +1,70 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+import 'src/presentation/screens/calendar_screen.dart';
+import 'src/presentation/screens/categories_screen.dart';
+import 'src/presentation/screens/profile_screen.dart';
+import 'widgets/featured_services_screen.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // The current index of the selected bottom navigation item
+  int _selectedIndex = 0;
+
+  // List of screens for each navigation tab
+  final List<Widget> _screens = [
+    FeaturedServicesScreen(), // Home (Featured Services)
+    CategoriesScreen(), // Categories
+    const CalendarScreen(), // Calendar
+    // RewardsWalletScreen(), // Rewards Wallet
+    const ProfileScreen(), // Profile
+  ];
+
+  // Method to update the selected index
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Featured Services', style: Theme.of(context).textTheme.headlineMedium),
-        backgroundColor: Colors.blue,
-        elevation: 0,
-      ),
-      body: ListView(
-        children: [
-          // Featured services carousel
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text('Explore our services', style: Theme.of(context).textTheme.headlineMedium),
-          ),
-          // Add more content widgets like service lists, cards, etc.
-        ],
-      ),
+      body: _screens[_selectedIndex], // Display the current screen
       bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Services'),
-          BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Categories'),
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: 'Calendar'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
         selectedItemColor: const Color(0xFF75140c),
         unselectedItemColor: Colors.grey,
+        currentIndex: _selectedIndex, // Highlight the selected tab
+        onTap: _onItemTapped, // Handle tab change
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            label: 'Categories',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: 'Calendar',
+          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.wallet_travel),
+          //   label: 'Rewards',
+          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }

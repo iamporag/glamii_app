@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:glamii_app/widgets/featured_services_screen.dart';
 
@@ -184,7 +186,7 @@ class ProviderBusinessPage extends StatelessWidget {
                 ),
                 ),
                 // Available Services
-                TitleWidget(title: "Available Services"),
+                const TitleWidget(title: "Available Services"),
                 // Column(
                 //   children: availableServices.map((service) {
                 //     return ListTile(
@@ -210,13 +212,13 @@ class ProviderBusinessPage extends StatelessWidget {
                 FeatureServiceArea(featuredServices: featuredServices),
                
                 // Contact Information
-                TitleWidget(title: 'Contact Information',),
+                const TitleWidget(title: 'Contact Information',),
                
                 ListTile(
-                  leading: Icon(Icons.phone, color: Color(0xFF75140C)),
+                  leading: const Icon(Icons.phone, color: Color(0xFF75140C)),
                   title: Text(
                     providerInfo['contactNumber']!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'TTChocolates',
                       fontSize: 16,
                       color: Colors.black,
@@ -236,7 +238,7 @@ class ProviderBusinessPage extends StatelessWidget {
                 ),
                
                 // Customer Reviews
-                TitleWidget(title: 'Customer Reviews',),
+                const TitleWidget(title: 'Customer Reviews',),
               
                 Column(
                   children: reviews.map((review) {
@@ -258,7 +260,7 @@ class ProviderBusinessPage extends StatelessWidget {
                           color: Colors.grey[600],
                         ),
                       ),
-                      leading: Icon(
+                      leading: const Icon(
                         Icons.star,
                         color: Colors.amber,
                       ),

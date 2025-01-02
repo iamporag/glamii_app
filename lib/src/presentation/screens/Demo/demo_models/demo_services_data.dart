@@ -45,7 +45,7 @@ String categoriesJson = '''
 
 // Fetch all categories
 Future<List<Category>> fetchCategories() async {
-  await Future.delayed(Duration(seconds: 1)); // Simulating network delay
+  await Future.delayed(const Duration(seconds: 1)); // Simulating network delay
 
   final List<dynamic> jsonData = json.decode(categoriesJson);
   return jsonData.map((json) => Category.fromJson(json)).toList();

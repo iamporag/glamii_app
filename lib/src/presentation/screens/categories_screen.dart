@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 
 class CategoriesScreen extends StatelessWidget {
@@ -34,6 +36,8 @@ class CategoriesScreen extends StatelessWidget {
           'https://images.pexels.com/photos/3764568/pexels-photo-3764568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
     },
   ];
+
+
 
   @override
   Widget build(BuildContext context) {
