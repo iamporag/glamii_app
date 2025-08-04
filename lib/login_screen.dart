@@ -46,7 +46,7 @@ class customTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         hintText: 'Email',
         border: OutlineInputBorder(),
       ),
