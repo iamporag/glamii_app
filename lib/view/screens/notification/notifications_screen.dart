@@ -1,6 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:glamii_app/util/dimensions.dart';
+import 'package:glamii_app/util/styles.dart';
 import 'package:intl/intl.dart';
 
 class NotificationsScreen extends StatelessWidget {
@@ -10,29 +12,30 @@ class NotificationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Notifications',
-            style: TextStyle(
-              fontFamily: 'GiazaStencil',
-              color: Colors.white,
-            ),
-          ),
-          backgroundColor: const Color(0xFF75140C),
-          centerTitle: true,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
+      appBar: AppBar(
+        title: const Text(
+          'Notifications',
+          style: TextStyle(
+            fontFamily: 'GiazaStencil',
+            color: Colors.white,
           ),
         ),
-        body: SafeArea(
-            child: SingleChildScrollView(
+        backgroundColor: const Color(0xFF75140C),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             children: [
               ListTile(
@@ -42,127 +45,110 @@ class NotificationsScreen extends StatelessWidget {
                 ),
                 title: Text(
                   'Appointments on ${DateFormat('MMMM dd, yyyy').format(_selectedDay)}',
-                  style: const TextStyle(
-                    fontFamily: 'GiazaStencil',
-                    fontSize: 20,
-                    color: Color(0xFF75140C),
+                  style: giazaStencilRegular.copyWith(
+                    fontSize: Dimensions.FONT_SIZE_DEFAULT,
                   ),
                 ),
-                subtitle: const Text(
+                subtitle: Text(
                   "Hair Cut  -  2024-11-12  -  at - 2.00 PM",
-                  style: TextStyle(
-                      fontFamily: "TTChocolates", color: Color(0xFF75140C)),
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontFamily: "TTChocolates",
+                    color: const Color(0xFF75140C),
+                  ),
                 ),
               ),
-              const ListTile(
-                leading: Icon(
+              ListTile(
+                leading: const Icon(
                   Icons.notifications_active_rounded,
                   color: Colors.green,
                 ),
                 title: Text(
                   'Your Appointments is Confirmed',
-                  style: TextStyle(
-                    fontFamily: 'GiazaStencil',
-                    fontSize: 20,
-                    color: Color(0xFF75140C),
+                  style: giazaStencilRegular.copyWith(
+                    fontSize: Dimensions.FONT_SIZE_DEFAULT,
                   ),
                 ),
                 subtitle: Text(
                   "Hair Cut  -  2024-11-15  -  at - 2.00 PM",
-                  style: TextStyle(
+                  style: theme.textTheme.bodyMedium?.copyWith(
                     fontFamily: "TTChocolates",
+                    color: const Color(0xFF75140C),
                   ),
                 ),
               ),
               ListTile(
                 leading: const Icon(Icons.add_circle, color: Colors.red),
-                title: const Text(
+                title: Text(
                   "Redeemed Points",
-                  style: TextStyle(
-                    fontFamily: 'TTChocolates',
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                  style: giazaStencilRegular.copyWith(
+                    fontSize: Dimensions.FONT_SIZE_DEFAULT,
                   ),
                 ),
                 subtitle: Text(
                   '2024-10-20 - For Booking Hair Cut Service',
-                  style: TextStyle(
-                    fontFamily: 'TTChocolates',
-                    fontSize: 14,
-                    color: Colors.grey[600],
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontFamily: "TTChocolates",
+                    color: const Color(0xFF75140C),
                   ),
                 ),
-                trailing: const Text(
+                trailing: Text(
                   "+200",
-                  style: TextStyle(
-                    fontFamily: 'TTChocolates',
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontFamily: "TTChocolates",
+                    color: const Color(0xFF75140C),
                   ),
                 ),
               ),
               ListTile(
                 leading: const Icon(Icons.add_circle, color: Colors.green),
-                title: const Text(
+                title: Text(
                   "Earned Points",
-                  style: TextStyle(
-                    fontFamily: 'TTChocolates',
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                  style: giazaStencilRegular.copyWith(
+                    fontSize: Dimensions.FONT_SIZE_DEFAULT,
                   ),
                 ),
                 subtitle: Text(
                   '2024-10-20 - For referring a friend',
-                  style: TextStyle(
-                    fontFamily: 'TTChocolates',
-                    fontSize: 14,
-                    color: Colors.grey[600],
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontFamily: "TTChocolates",
+                    color: const Color(0xFF75140C),
                   ),
                 ),
-                trailing: const Text(
+                trailing: Text(
                   "+200",
-                  style: TextStyle(
-                    fontFamily: 'TTChocolates',
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontFamily: "TTChocolates",
+                    color: const Color(0xFF75140C),
                   ),
                 ),
               ),
               ListTile(
                 leading: const Icon(Icons.add_circle, color: Colors.grey),
-                title: const Text(
+                title: Text(
                   "Expired Points",
-                  style: TextStyle(
-                    fontFamily: 'TTChocolates',
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                  style: giazaStencilRegular.copyWith(
+                    fontSize: Dimensions.FONT_SIZE_DEFAULT,
                   ),
                 ),
                 subtitle: Text(
                   '2024-10-05 - Expired',
-                  style: TextStyle(
-                    fontFamily: 'TTChocolates',
-                    fontSize: 14,
-                    color: Colors.grey[600],
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontFamily: "TTChocolates",
+                    color: const Color(0xFF75140C),
                   ),
                 ),
-                trailing: const Text(
-                  "+200",
-                  style: TextStyle(
-                    fontFamily: 'TTChocolates',
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                trailing: Text(
+                  "-200",
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontFamily: "TTChocolates",
+                    color: const Color(0xFF75140C),
                   ),
                 ),
               ),
             ],
           ),
-        )));
+        ),
+      ),
+    );
   }
 }

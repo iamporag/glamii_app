@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:glamii_app/util/dimensions.dart';
+import 'package:glamii_app/util/styles.dart';
 import 'package:readmore/readmore.dart';
 
-import '../../business/provider_business_page.dart';
-import '../../feature_service/featured_services_screen.dart';
+import '../../provider/provider_business_page.dart';
+import '../featured_services_screen.dart';
 
 class FeaturedServiceDetailScreen extends StatelessWidget {
   final Map<String, String> service;
@@ -16,9 +18,8 @@ class FeaturedServiceDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           service['title']!,
-          style: const TextStyle(
-            fontFamily: 'GiazaStencil',
-            color: Colors.white,
+          style: giazaStencilRegular.copyWith(
+            color: theme.cardColor,
           ),
         ),
         backgroundColor: const Color(0xFF75140C),
@@ -52,56 +53,70 @@ class FeaturedServiceDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    service['title']!,
-                    style: const TextStyle(
-                      fontFamily: 'GiazaStencil',
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF75140C),
-                    ),
-                  ),
-                  InkWell(
+                  Text(service['title']!,
+                      style: giazaStencilMedium.copyWith(
+                        fontSize: Dimensions.FONT_SIZE_LARGE,
+                        color: theme.primaryColor,
+                      )),
+                  GestureDetector(
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProviderBusinessPage()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProviderBusinessPage(),
+                        ),
+                      );
                     },
-                    child: const Text(
-                      "Luxury Salon & Spa",
-                      style: TextStyle(
-                        fontFamily: 'GiazaStencil',
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF75140C),
-                      ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.store,
+                          color: theme.primaryColor,
+                          size: 18,
+                        ),
+                        const SizedBox(
+                          width: Dimensions.PADDING_SIZE_EXTRA_SMALL,
+                        ),
+                        Text(
+                          "Luxury Salon & Spa",
+                          style: theme.textTheme.bodyMedium?.copyWith(),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 8),
-
+                  const SizedBox(
+                    height: Dimensions.FREE_SIZE_SMALL,
+                  ),
                   // Service Price and Duration
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        'Price: ${service['price']}',
-                        style: const TextStyle(
-                          fontFamily: 'TTChocolates',
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.shopping_cart,
+                            size: 18,
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            'Price: ${service['price']}',
+                            style: theme.textTheme.bodyMedium?.copyWith(),
+                          ),
+                        ],
                       ),
                       const SizedBox(width: 20),
-                      Text(
-                        'Duration: ${service['duration']}',
-                        style: const TextStyle(
-                          fontFamily: 'TTChocolates',
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.access_time,
+                            size: 18,
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            'Duration: ${service['duration']}',
+                            style: theme.textTheme.bodyMedium?.copyWith(),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -146,9 +161,10 @@ class FeaturedServiceDetailScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const TitleWidget(
+            TitleWidget(
               title: "Review",
-              trailing: Text("View All (12)"),
+              trailing: "View All (12)",
+              onTap: () {},
             ),
 
             const ListTile(

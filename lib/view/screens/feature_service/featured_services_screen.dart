@@ -8,7 +8,7 @@ import 'package:glamii_app/util/styles.dart';
 
 import '../notification/notifications_screen.dart';
 import '../rewards/rewards_wallet_screen.dart';
-import '../rewards/widgets/featured_service_detail_screen.dart';
+import 'widgets/featured_service_detail_screen.dart';
 import '../rewards/widgets/service_card.dart';
 
 class FeaturedServicesScreen extends StatelessWidget {
@@ -348,16 +348,21 @@ Experience a professional haircut that goes beyond expectations, offering a tail
                   initialPage: 0,
                 ),
               ),
-              const TitleWidget(
+              const SizedBox(
+                height: Dimensions.FREE_SIZE_DEFAULT,
+              ),
+              TitleWidget(
                 title: "Featured Services",
-                trailing: Text(
-                  "View All",
-                  style: TextStyle(
-                    fontFamily: 'TTChocolates',
-                  ),
-                ),
+                trailing: "View All",
+                onTap: () {},
+              ),
+              const SizedBox(
+                height: Dimensions.FREE_SIZE_SMALL,
               ),
               FeatureServiceArea(featuredServices: featuredServices),
+              const SizedBox(
+                height: Dimensions.FREE_SIZE_DEFAULT,
+              ),
               AllServicesArea(featuredServices: featuredServices),
             ],
           ),
@@ -441,7 +446,7 @@ class AllServicesArea extends StatelessWidget {
               const NeverScrollableScrollPhysics(), // Disable scrolling for the ListView
           itemCount: featuredServices.length,
           separatorBuilder: (context, index) {
-            return const SizedBox(height: Dimensions.PADDING_SIZE_SMALL);
+            return const SizedBox(height: Dimensions.FREE_SIZE_SMALL);
           },
           itemBuilder: (context, index) {
             final service = featuredServices[index];
@@ -479,19 +484,19 @@ class FeatureServiceArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 175,
-      child: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        scrollDirection: Axis.horizontal,
-        separatorBuilder: (context, index) => const SizedBox(
-          width: 10,
-        ),
-        itemCount: featuredServices.length,
-        itemBuilder: (context, index) {
-          final service = featuredServices[index];
-          return FeaturedServiceCard(service: service);
-        },
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: Dimensions.PADDING_SIZE_DEFAULT),
+        child: Row(
+            children: List.generate(
+          featuredServices.length,
+          (index) {
+            final service = featuredServices[index];
+            return FeaturedServiceCard(service: service);
+          },
+        )),
       ),
     );
   }
@@ -510,9 +515,9 @@ class FeaturedServiceCard extends StatelessWidget {
     return SizedBox(
       width: 220,
       child: Card(
-        elevation: 5,
+        elevation: 1,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -520,7 +525,9 @@ class FeaturedServiceCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                topLeft: Radius.circular(Dimensions.RADIUS_DEFAULT),
+                topRight: Radius.circular(Dimensions.RADIUS_DEFAULT),
+              ),
               child: Image.network(
                 service['imageUrl']!,
                 height: 90,
@@ -633,24 +640,45 @@ class ServiceReviewRow extends StatelessWidget {
 
 class TitleWidget extends StatelessWidget {
   final String title;
-  final Widget? trailing;
+  final String? trailing;
+  final VoidCallback? onTap;
   const TitleWidget({
     super.key,
     required this.title,
     this.trailing,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        title,
-        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: const Color(0xFF75140C),
-              fontFamily: 'GiazaStencil',
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          horizontal: Dimensions.PADDING_SIZE_DEFAULT),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: giazaStencilBlack.copyWith(
+              color: theme.primaryColor,
             ),
+          ),
+          trailing != null
+              ? GestureDetector(
+                  onTap: () {
+                    onTap;
+                  },
+                  child: Text(
+                    trailing ?? '',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.hintColor,
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
+        ],
       ),
-      trailing: trailing,
     );
   }
 }

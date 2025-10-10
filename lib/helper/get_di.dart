@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:glamii_app/controller/reward_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import '../controller/auth_controller.dart';
@@ -38,6 +39,7 @@ Future<Map<String, Map<String, String>>> init() async {
   );
   Get.lazyPut(() => ThemeController(sharedPreferences: Get.find()));
   Get.lazyPut(() => AuthController(authRepo: Get.find()));
+  Get.lazyPut(() => RewardController());
 
   // Retrieving localized data
   Map<String, Map<String, String>> languages = {};
