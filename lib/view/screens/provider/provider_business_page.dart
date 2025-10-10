@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../util/dimensions.dart';
 import '../feature_service/featured_services_screen.dart';
 
 class ProviderBusinessPage extends StatelessWidget {
@@ -189,32 +190,12 @@ class ProviderBusinessPage extends StatelessWidget {
                     ),
                   ),
                 ),
+                const SizedBox(height: Dimensions.FREE_SIZE_DEFAULT),
                 // Available Services
                 const TitleWidget(title: "Available Services"),
-                // Column(
-                //   children: availableServices.map((service) {
-                //     return ListTile(
-                //       title: Text(
-                //         service['title']!,
-                //         style: TextStyle(
-                //           fontFamily: 'TTChocolates',
-                //           fontSize: 16,
-                //           color: Colors.black,
-                //         ),
-                //       ),
-                //       trailing: Text(
-                //         '\$${service['price']}',
-                //         style: TextStyle(
-                //           fontFamily: 'TTChocolates',
-                //           fontSize: 16,
-                //           color: Color(0xFF75140C),
-                //         ),
-                //       ),
-                //     );
-                //   }).toList(),
-                // ),
+                const SizedBox(height: Dimensions.FREE_SIZE_SMALL),
                 FeatureServiceArea(featuredServices: featuredServices),
-
+                const SizedBox(height: Dimensions.FREE_SIZE_DEFAULT),
                 // Contact Information
                 const TitleWidget(
                   title: 'Contact Information',
@@ -243,7 +224,7 @@ class ProviderBusinessPage extends StatelessWidget {
                     ),
                   ),
                 ),
-
+                const SizedBox(height: Dimensions.FREE_SIZE_DEFAULT),
                 // Customer Reviews
                 const TitleWidget(
                   title: 'Customer Reviews',
