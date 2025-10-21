@@ -1,5 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
-
 import 'package:flutter/material.dart';
 import 'package:glamii_app/widgets/featured_services_screen.dart';
 
@@ -131,6 +129,8 @@ class ProviderBusinessPage extends StatelessWidget {
     // Add more services as needed
   ];
 
+  ProviderBusinessPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,12 +144,15 @@ class ProviderBusinessPage extends StatelessWidget {
         ),
         backgroundColor: const Color(0xFF75140C),
         centerTitle: true,
-        leading: IconButton(onPressed: (){
-          Navigator.pop(context);
-        }, icon: const Icon(
-          Icons.arrow_back,
-          color: Colors.white,
-        ),),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -168,22 +171,22 @@ class ProviderBusinessPage extends StatelessWidget {
                 // Provider Name & Description
                 ListTile(
                   title: Text(
-                  providerInfo['name']!,
-                  style: const TextStyle(
-                    fontFamily: 'GiazaStencil',
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF75140C),
+                    providerInfo['name']!,
+                    style: const TextStyle(
+                      fontFamily: 'GiazaStencil',
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF75140C),
+                    ),
                   ),
-                ),
-                subtitle: Text(
-                  providerInfo['description']!,
-                  style: const TextStyle(
-                    fontFamily: 'TTChocolates',
-                    fontSize: 16,
-                    color: Colors.black,
+                  subtitle: Text(
+                    providerInfo['description']!,
+                    style: const TextStyle(
+                      fontFamily: 'TTChocolates',
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
                 ),
                 // Available Services
                 const TitleWidget(title: "Available Services"),
@@ -210,10 +213,12 @@ class ProviderBusinessPage extends StatelessWidget {
                 //   }).toList(),
                 // ),
                 FeatureServiceArea(featuredServices: featuredServices),
-               
+
                 // Contact Information
-                const TitleWidget(title: 'Contact Information',),
-               
+                const TitleWidget(
+                  title: 'Contact Information',
+                ),
+
                 ListTile(
                   leading: const Icon(Icons.phone, color: Color(0xFF75140C)),
                   title: Text(
@@ -226,7 +231,8 @@ class ProviderBusinessPage extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  leading: const Icon(Icons.location_on, color: Color(0xFF75140C)),
+                  leading:
+                      const Icon(Icons.location_on, color: Color(0xFF75140C)),
                   title: Text(
                     providerInfo['address']!,
                     style: const TextStyle(
@@ -236,10 +242,12 @@ class ProviderBusinessPage extends StatelessWidget {
                     ),
                   ),
                 ),
-               
+
                 // Customer Reviews
-                const TitleWidget(title: 'Customer Reviews',),
-              
+                const TitleWidget(
+                  title: 'Customer Reviews',
+                ),
+
                 Column(
                   children: reviews.map((review) {
                     return ListTile(

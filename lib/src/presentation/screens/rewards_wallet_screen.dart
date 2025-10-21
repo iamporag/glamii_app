@@ -1,8 +1,6 @@
 // ignore_for_file: unnecessary_string_interpolations
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:glamii_app/src/bloc/bloc/points_bloc.dart';
 
 class RewardsWalletScreen extends StatelessWidget {
   const RewardsWalletScreen({super.key});
@@ -54,12 +52,15 @@ class RewardsWalletScreen extends StatelessWidget {
         ),
         backgroundColor: const Color(0xFF75140C),
         centerTitle: true,
-        leading: IconButton(onPressed: (){
-          Navigator.pop(context);
-        }, icon: const Icon(
-          Icons.arrow_back,
-          color: Colors.white,
-        ),),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -71,10 +72,10 @@ class RewardsWalletScreen extends StatelessWidget {
               color: Color(0xFF75140C),
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(24)),
             ),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   'Current Balance',
                   style: TextStyle(
                     fontFamily: 'TTChocolates',
@@ -82,99 +83,99 @@ class RewardsWalletScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 8),
-                BlocBuilder<PointsBloc, PointsState>(
-                  builder: (context, state) {
-                    if (state is PointsInitial) {
-                      return const Text(
-                        "0",
-                        style: TextStyle(
-                          fontFamily: 'GiazaStencil',
-                          fontSize: 36,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      );
-                    } else if (state is PointsCalculatedState) {
-                      return Text(
-                        "${state.totalPoints.toString()}",
-                        style: const TextStyle(
-                          fontFamily: 'GiazaStencil',
-                          fontSize: 36,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      );
-                    } else {
-                      return const CircularProgressIndicator();
-                    }
-                  },
-                )
+                SizedBox(height: 8),
+                // BlocBuilder<PointsBloc, PointsState>(
+                //   builder: (context, state) {
+                //     if (state is PointsInitial) {
+                //       return const Text(
+                //         "0",
+                //         style: TextStyle(
+                //           fontFamily: 'GiazaStencil',
+                //           fontSize: 36,
+                //           fontWeight: FontWeight.bold,
+                //           color: Colors.white,
+                //         ),
+                //       );
+                //     } else if (state is PointsCalculatedState) {
+                //       return Text(
+                //         "${state.totalPoints.toString()}",
+                //         style: const TextStyle(
+                //           fontFamily: 'GiazaStencil',
+                //           fontSize: 36,
+                //           fontWeight: FontWeight.bold,
+                //           color: Colors.white,
+                //         ),
+                //       );
+                //     } else {
+                //       return const CircularProgressIndicator();
+                //     }
+                //   },
+                // )
               ],
             ),
           ),
           const SizedBox(height: 16),
           // Rewards Activity Section
-          BlocProvider(
-            create: (context) => PointsBloc()..add(LoadRewardActivitiesEvent()),
-            child: Expanded(child: BlocBuilder<PointsBloc, PointsState>(
-              builder: (context, state) {
-                if (state is RewardActivitiesLoadedState) {
-                  return ListView.builder(
-                    itemCount: state.rewardActivities.length,
-                    itemBuilder: (context, index) {
-                      final activity = state.rewardActivities[index];
-                      return ListTile(
-                        leading: Icon(
-                          activity['activity'] == 'Earned Points'
-                              ? Icons.add_circle
-                              : activity['activity'] == 'Redeemed Points'
-                                  ? Icons.remove_circle
-                                  : Icons.warning,
-                          color: activity['activity'] == 'Earned Points'
-                              ? Colors.green
-                              : activity['activity'] == 'Redeemed Points'
-                                  ? Colors.red
-                                  : Colors.grey,
-                        ),
-                        title: Text(
-                          activity['activity']!,
-                          style: const TextStyle(
-                            fontFamily: 'TTChocolates',
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        subtitle: Text(
-                          '${activity['date']} - ${activity['description']}',
-                          style: TextStyle(
-                            fontFamily: 'TTChocolates',
-                            fontSize: 14,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                        trailing: Text(
-                          activity['points']!,
-                          style: const TextStyle(
-                            fontFamily: 'TTChocolates',
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                } else {
-                  return const Center(
-                      child: CircularProgressIndicator(
-                    color: Colors.red,
-                  ));
-                }
-              },
-            )),
-          )
+          // BlocProvider(
+          //   create: (context) => PointsBloc()..add(LoadRewardActivitiesEvent()),
+          //   child: Expanded(child: BlocBuilder<PointsBloc, PointsState>(
+          //     builder: (context, state) {
+          //       if (state is RewardActivitiesLoadedState) {
+          //         return ListView.builder(
+          //           itemCount: state.rewardActivities.length,
+          //           itemBuilder: (context, index) {
+          //             final activity = state.rewardActivities[index];
+          //             return ListTile(
+          //               leading: Icon(
+          //                 activity['activity'] == 'Earned Points'
+          //                     ? Icons.add_circle
+          //                     : activity['activity'] == 'Redeemed Points'
+          //                         ? Icons.remove_circle
+          //                         : Icons.warning,
+          //                 color: activity['activity'] == 'Earned Points'
+          //                     ? Colors.green
+          //                     : activity['activity'] == 'Redeemed Points'
+          //                         ? Colors.red
+          //                         : Colors.grey,
+          //               ),
+          //               title: Text(
+          //                 activity['activity']!,
+          //                 style: const TextStyle(
+          //                   fontFamily: 'TTChocolates',
+          //                   fontSize: 16,
+          //                   fontWeight: FontWeight.bold,
+          //                   color: Colors.black,
+          //                 ),
+          //               ),
+          //               subtitle: Text(
+          //                 '${activity['date']} - ${activity['description']}',
+          //                 style: TextStyle(
+          //                   fontFamily: 'TTChocolates',
+          //                   fontSize: 14,
+          //                   color: Colors.grey[600],
+          //                 ),
+          //               ),
+          //               trailing: Text(
+          //                 activity['points']!,
+          //                 style: const TextStyle(
+          //                   fontFamily: 'TTChocolates',
+          //                   fontSize: 16,
+          //                   fontWeight: FontWeight.bold,
+          //                   color: Colors.black,
+          //                 ),
+          //               ),
+          //             );
+          //           },
+          //         );
+          //       } else {
+          //         return const Center(
+          //             child: CircularProgressIndicator(
+          //           color: Colors.red,
+          //         ));
+          //       }
+          //     },
+          //   )),
+          // )
         ],
       ),
     );

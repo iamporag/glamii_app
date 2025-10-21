@@ -58,7 +58,8 @@ Future<Category?> fetchCategoryById(String categoryId) async {
   // Find the category by ID
   return categories.firstWhere(
     (category) => category.id == categoryId,
-    orElse: () => Category(id: '', title: '', products: []), // Return empty if not found
+    orElse: () =>
+        Category(id: '', title: '', products: []), // Return empty if not found
   );
 }
 
@@ -70,9 +71,9 @@ Future<Product?> fetchProductById(String categoryId, String productId) async {
   return category?.products.firstWhere(
     (product) => product.productId == productId,
     orElse: () => Product(
-      productId: '', 
-      productTitle: 'Not Found', 
-      productDescription: '', 
+      productId: '',
+      productTitle: 'Not Found',
+      productDescription: '',
       category: '',
     ), // Return empty product if not found
   );

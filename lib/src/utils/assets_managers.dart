@@ -1,4 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 class AssetsManagers {
-  static const String LOGO = 'assets/images/glamii_app_logo.svg';
-  static const String LOGO_1 = 'assets/images/glamii_app_logo(1)-01.svg';
+  static const String APP_LOGO = 'assets/image/glamii_app_logo.svg';
 }

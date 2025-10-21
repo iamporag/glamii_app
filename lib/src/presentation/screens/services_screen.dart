@@ -126,19 +126,6 @@
 //   }
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-// ignore_for_file: use_key_in_widget_constructors
-
 import 'package:flutter/material.dart';
 
 class ServicesScreen extends StatelessWidget {
@@ -149,43 +136,49 @@ class ServicesScreen extends StatelessWidget {
       'description': 'A fresh haircut to make you look your best.',
       'price': '\$25',
       'duration': '30 mins',
-      'image': 'https://images.pexels.com/photos/3356170/pexels-photo-3356170.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Replace with actual image path
+      'image':
+          'https://images.pexels.com/photos/3356170/pexels-photo-3356170.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Replace with actual image path
     },
     {
       'title': 'Facial Treatment',
       'description': 'Rejuvenate your skin with a luxurious facial treatment.',
       'price': '\$40',
       'duration': '45 mins',
-      'image': 'https://images.pexels.com/photos/3738349/pexels-photo-3738349.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'image':
+          'https://images.pexels.com/photos/3738349/pexels-photo-3738349.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     },
     {
       'title': 'Massage',
       'description': 'Relax your body with a soothing massage.',
       'price': '\$60',
       'duration': '60 mins',
-      'image': 'https://images.pexels.com/photos/3764568/pexels-photo-3764568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'image':
+          'https://images.pexels.com/photos/3764568/pexels-photo-3764568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     },
   ];
+
+  ServicesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text(
+        title: const Text(
           'Services',
           style: TextStyle(
             fontFamily: 'GiazaStencil',
             color: Colors.white,
           ),
         ),
-        backgroundColor:const Color(0xFF75140C),
+        backgroundColor: const Color(0xFF75140C),
         centerTitle: true,
       ),
       body: ListView.builder(
         itemCount: services.length,
         itemBuilder: (context, index) {
           return ListTile(
-            contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
             leading: CircleAvatar(
               radius: 30,
               backgroundImage: NetworkImage(services[index]['image']!),
@@ -214,7 +207,8 @@ class ServicesScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ServiceDetailScreen(service: services[index]),
+                  builder: (context) =>
+                      ServiceDetailScreen(service: services[index]),
                 ),
               );
             },
@@ -276,7 +270,7 @@ class ServiceDetailScreen extends StatelessWidget {
               children: [
                 Text(
                   'Price: ${service['price']}',
-                  style:const TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'TTChocolates',
                     fontSize: 18,
                     color: Colors.black,
@@ -311,7 +305,8 @@ class ServiceDetailScreen extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF75140C),
-                  padding:const EdgeInsets.symmetric(horizontal: 50, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 50, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

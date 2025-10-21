@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:glamii_app/src/presentation/screens/notifications_screen.dart';
 
@@ -19,7 +18,10 @@ class ProfileScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationsScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NotificationsScreen()));
               },
               icon: const Icon(
                 Icons.notifications,
@@ -56,7 +58,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-      
+
               // Profile Info Section
               Divider(thickness: 1, color: Colors.grey[300]),
               ListTile(
@@ -121,7 +123,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               Divider(thickness: 1, color: Colors.grey[300]),
-      
+
               // Action Buttons
               ListTile(
                 leading: const Icon(Icons.settings, color: Color(0xFF75140C)),

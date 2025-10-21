@@ -9,18 +9,18 @@ class LoginScreen extends StatelessWidget {
         body: SingleChildScrollView(
       child: SizedBox(
         height: MediaQuery.of(context).size.height,
-        child: SafeArea(
+        child: const SafeArea(
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
+                Text(
                   "Login",
                   style: TextStyle(
                     fontSize: 32,
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 20,
                 ),
                 customTextField(),
@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
                   height: 20,
                 ),
                 customTextField(),
-                const Text('Login'),
+                Text('Login'),
               ],
             ),
           ),

@@ -1,5 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
@@ -20,42 +18,42 @@ class _CalendarScreenState extends State<CalendarScreen> {
     {
       'service': 'Haircut',
       'provider': 'John Park',
-      'date': '2024-11-15',
+      'date': '2025-10-09',
       'time': '2:00 PM',
       'status': 'Upcoming',
     },
     {
       'service': 'Massage',
       'provider': 'Sophia White',
-      'date': '2024-11-15',
+      'date': '2025-10-09',
       'time': '5:00 PM',
       'status': 'Upcoming',
     },
     {
       'service': 'Facial Treatment',
       'provider': 'Anna Lee',
-      'date': '2024-11-15',
+      'date': '2025-10-09',
       'time': '9:00 PM',
       'status': 'Upcoming',
     },
     {
       'service': 'Facial Treatment',
       'provider': 'Jane Smith',
-      'date': '2024-11-14',
+      'date': '2025-10-09',
       'time': '11:00 AM',
       'status': 'Upcoming',
     },
     {
       'service': 'Massage',
       'provider': 'Anna Lee',
-      'date': '2024-11-11',
+      'date': '2025-10-09',
       'time': '4:00 PM',
       'status': 'Completed',
     },
     {
       'service': 'Manicure',
       'provider': 'Sophia White',
-      'date': '2024-11-10',
+      'date': '2025-10-09',
       'time': '1:00 PM',
       'status': 'Completed',
     },

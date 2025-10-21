@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, prefer_final_fields
+// ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 class NotificationsScreen extends StatelessWidget {
   NotificationsScreen({super.key});
 
-  DateTime _selectedDay = DateTime.now();
+  final DateTime _selectedDay = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +132,6 @@ class NotificationsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              
               ListTile(
                 leading: const Icon(Icons.add_circle, color: Colors.grey),
                 title: const Text(

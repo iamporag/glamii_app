@@ -1,5 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
-
 import 'package:flutter/material.dart';
 
 class CategoriesScreen extends StatelessWidget {
@@ -37,7 +35,7 @@ class CategoriesScreen extends StatelessWidget {
     },
   ];
 
-
+  CategoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,11 +55,10 @@ class CategoriesScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            childAspectRatio: 16/9
-          ),
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 16 / 9),
           itemCount: categories.length,
           itemBuilder: (context, index) {
             final category = categories[index];

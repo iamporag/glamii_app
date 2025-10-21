@@ -16,7 +16,7 @@ class CompanyScreen extends StatelessWidget {
       ),
       body: FutureBuilder<ProviderModel?>(
         future: Future.delayed(
-         const Duration(seconds: 1), // Simulating async data fetching
+          const Duration(seconds: 1), // Simulating async data fetching
           () => getProviderById(companyId),
         ),
         builder: (context, snapshot) {
@@ -41,14 +41,15 @@ class CompanyScreen extends StatelessWidget {
               children: [
                 Text(
                   company.providerTitle,
-                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   company.providerDescription,
                   style: const TextStyle(fontSize: 16),
                 ),
-               const SizedBox(height: 16),
+                const SizedBox(height: 16),
                 const Text(
                   'Available Jobs:',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
@@ -72,5 +73,5 @@ class CompanyScreen extends StatelessWidget {
         },
       ),
     );
-    }
-    }
+  }
+}

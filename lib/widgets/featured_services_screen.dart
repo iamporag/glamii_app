@@ -2,8 +2,6 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:glamii_app/src/bloc/bloc/points_bloc.dart';
 import 'package:glamii_app/src/presentation/screens/notifications_screen.dart';
 import 'package:glamii_app/src/presentation/screens/rewards_wallet_screen.dart';
 
@@ -379,35 +377,35 @@ class RewardPoint extends StatelessWidget {
           ),
         );
       },
-      icon: Row(
+      icon: const Row(
         children: [
-          BlocBuilder<PointsBloc, PointsState>(
-            builder: (context, state) {
-              if (state is PointsInitial) {
-                return Text(
-                  "0 Point",
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall
-                      ?.copyWith(color: Colors.white),
-                );
-              } else if (state is PointsCalculatedState) {
-                return Text(
-                  state.totalPoints.toString() + " Points",
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall
-                      ?.copyWith(color: Colors.white),
-                );
-              } else {
-                return const CircularProgressIndicator();
-              }
-            },
-          ),
-          const SizedBox(
+          // BlocBuilder<PointsBloc, PointsState>(
+          //   builder: (context, state) {
+          //     if (state is PointsInitial) {
+          //       return Text(
+          //         "0 Point",
+          //         style: Theme.of(context)
+          //             .textTheme
+          //             .titleSmall
+          //             ?.copyWith(color: Colors.white),
+          //       );
+          //     } else if (state is PointsCalculatedState) {
+          //       return Text(
+          //         state.totalPoints.toString() + " Points",
+          //         style: Theme.of(context)
+          //             .textTheme
+          //             .titleSmall
+          //             ?.copyWith(color: Colors.white),
+          //       );
+          //     } else {
+          //       return const CircularProgressIndicator();
+          //     }
+          //   },
+          // ),
+          SizedBox(
             width: 5,
           ),
-          const Icon(
+          Icon(
             Icons.local_police_outlined,
             color: Colors.white,
           ),
