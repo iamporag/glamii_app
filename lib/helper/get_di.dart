@@ -26,7 +26,6 @@ Future<Map<String, Map<String, String>>> init() async {
 
   // Repository
   Get.lazyPut(() => SplashController());
-  Get.lazyPut(() => NavigationController());
   Get.lazyPut(
     () => AuthRepo(apiClient: Get.find(), sharedPreferences: Get.find()),
   );

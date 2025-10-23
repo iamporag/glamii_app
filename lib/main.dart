@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -53,17 +55,14 @@ class MyApp extends StatelessWidget {
                     statusBarColor: Colors.transparent,
                     statusBarIconBrightness:
                         isDark ? Brightness.light : Brightness.dark,
-                    systemNavigationBarColor: theme.cardColor, // Android only
+                    systemNavigationBarColor: theme.scaffoldBackgroundColor,
                     systemNavigationBarIconBrightness:
                         isDark ? Brightness.light : Brightness.dark,
                   ),
-                  child: Container(
-                    color: theme.cardColor,
-                    child: SafeArea(
-                      top: false,
-                      bottom: true,
-                      child: child!,
-                    ),
+                  child: SafeArea(
+                    top: false,
+                    bottom: Platform.isAndroid,
+                    child: child!,
                   ),
                 );
               },

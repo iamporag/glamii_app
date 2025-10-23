@@ -1,151 +1,152 @@
 // ignore_for_file: library_private_types_in_public_api, deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../controller/navigation_controller.dart';
+import 'package:glamii_app/view/screens/calendar/calendar_screen.dart';
+import 'package:glamii_app/view/screens/category/categories_screen.dart';
+import 'package:glamii_app/view/screens/feature_service/featured_services_screen.dart';
+import 'package:glamii_app/view/screens/profile/profile_screen.dart';
 
-import '../../theme/light_theme.dart';
 import '../../util/dimensions.dart';
 import '../../util/styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class NavigationBarScreen extends StatelessWidget {
-  NavigationBarScreen({super.key});
+class NavigationBarScreen extends StatefulWidget {
+  const NavigationBarScreen({super.key});
 
-  final NavigationController controller = Get.put(NavigationController());
+  @override
+  State<NavigationBarScreen> createState() => _NavigationBarScreenState();
+}
 
-  static DateTime? _lastBackPressTime;
+class _NavigationBarScreenState extends State<NavigationBarScreen> {
+  int _selectedIndex = 0;
+  DateTime? lastPressed;
 
-  Future<bool> _onWillPop(BuildContext context) async {
-    final now = DateTime.now();
-    final difference =
-        _lastBackPressTime == null ? null : now.difference(_lastBackPressTime!);
+  final List<Widget> _pages = [
+    FeaturedServicesScreen(),
+    CategoriesScreen(),
+    const CalendarScreen(),
+    const ProfileScreen(),
+  ];
 
-    if (difference == null || difference > const Duration(seconds: 2)) {
-      _lastBackPressTime = now;
-      final messenger = ScaffoldMessenger.of(context);
-      messenger.showSnackBar(
-        const SnackBar(
-          content: Text("Press back again to exit"),
-          duration: Duration(seconds: 2),
-        ),
-      );
-      return false;
+  // Add a boolean to track the state of the drawer
+  bool _isDrawerOpen = false;
+
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _onItemTapped(int index) {
+    if (index == 4) {
+      // Open drawer when the "More" button is clicked
+      scaffoldKey.currentState?.openDrawer();
+    } else {
+      setState(() {
+        _selectedIndex = index;
+        _isDrawerOpen = false;
+      });
     }
-    return true;
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return WillPopScope(
-      onWillPop: () => _onWillPop(context),
-      child: Obx(
-        () => Scaffold(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          extendBody: true,
-          body: controller.pages[controller.selectedIndex.value],
-          bottomNavigationBar: Container(
-            height: controller.barHeight,
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
-            decoration: BoxDecoration(
-              color: theme.cardColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.07),
-                  blurRadius: 10,
-                  offset: const Offset(0, -1),
-                ),
-              ],
+      onWillPop: () async {
+        final now = DateTime.now();
+        final backButtonHasNotBeenPressedOrSnackBarHasBeenClosed =
+            lastPressed == null ||
+                now.difference(lastPressed!) > const Duration(seconds: 2);
+
+        if (_selectedIndex != 0) {
+          setState(() {
+            _selectedIndex = 0;
+          });
+          return false;
+        }
+
+        if (backButtonHasNotBeenPressedOrSnackBarHasBeenClosed) {
+          lastPressed = DateTime.now();
+          return false;
+        }
+
+        return true;
+      },
+      child: Scaffold(
+        key: scaffoldKey,
+        onDrawerChanged: (isOpen) {
+          setState(() {
+            _isDrawerOpen = isOpen;
+          });
+        },
+        body: Center(
+          child: _pages.elementAt(_selectedIndex),
+        ),
+        bottomNavigationBar: Theme(
+          data: Theme.of(context).copyWith(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+          ),
+          child: BottomNavigationBar(
+            backgroundColor: Theme.of(context).cardColor,
+            elevation: 5,
+            unselectedItemColor: Theme.of(context).disabledColor,
+            selectedItemColor: Theme.of(context).primaryColor,
+            type: BottomNavigationBarType.fixed,
+            selectedLabelStyle: bodyMediumText(context)!.copyWith(
+              fontSize: Dimensions.FONT_SIZE_SMALL,
+              color: Theme.of(context).primaryColor,
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _navItem(
-                  context,
-                  index: 0,
-                  iconData: Icons.home_max,
-                  label: "Home",
-                ),
-                _navItem(
-                  context,
-                  index: 1,
-                  iconData: Icons.favorite,
-                  label: "Favorites",
-                ),
-                _navItem(
-                  context,
-                  index: 2,
-                  iconData: Icons.calendar_month,
-                  label: "Calendar",
-                ),
-                _navItem(
-                  context,
-                  index: 3,
-                  iconData: Icons.account_circle,
-                  label: "Profile",
-                ),
-              ],
+            unselectedLabelStyle: bodyMediumText(context)!.copyWith(
+              fontSize: Dimensions.FONT_SIZE_SMALL,
+              color: Theme.of(context).disabledColor,
             ),
+            items: [
+              _buildNavItem(iconData: Icons.home, label: 'Home', index: 0),
+              _buildNavItem(
+                  iconData: Icons.favorite, label: 'Favorite', index: 1),
+              _buildNavItem(
+                  iconData: Icons.calendar_month, label: 'Calendar', index: 2),
+              _buildNavItem(iconData: Icons.person, label: 'Profile', index: 3),
+            ],
+            currentIndex: _isDrawerOpen
+                ? 4
+                : _selectedIndex, // Drawer open shows "More" as selected
+            onTap: _onItemTapped,
           ),
         ),
       ),
     );
   }
 
-  Widget _navItem(BuildContext context,
-      {required int index,
-      String? icon,
-      required String label,
-      IconData? iconData}) {
-    final theme = Theme.of(context);
-    final bool isSelected = controller.selectedIndex.value == index;
-
-    return GestureDetector(
-      onTap: () => controller.changePage(index),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 250),
-            padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_EXTRA_SMALL),
-            decoration: BoxDecoration(
-              color: isSelected
-                  ? AppColor.primary.withOpacity(0.9)
-                  : Colors.transparent,
-              shape: BoxShape.circle,
-            ),
-            child: icon != null
-                ? SvgPicture.asset(
-                    icon,
-                    width: 20,
-                    color: isSelected
-                        ? AppColor.primary
-                        : Colors.grey.withOpacity(0.7),
-                  )
-                : Icon(
-                    iconData,
-                    size: 20,
-                    color: isSelected
-                        ? AppColor.cardColor
-                        : Colors.grey.withOpacity(0.7),
-                  ),
-          ),
-          Text(
-            label,
-            style: bodyMediumText(context)!.copyWith(
-              fontSize: Dimensions.FONT_SIZE_SMALL,
-              color: isSelected
-                  ? Get.isDarkMode
-                      ? AppColor.cardColor
-                      : theme.primaryColor
-                  : Theme.of(context).disabledColor,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.w400,
-            ),
-          ),
-        ],
-      ),
+  BottomNavigationBarItem _buildNavItem({
+    String? iconPath,
+    IconData? iconData,
+    required String label,
+    required int index,
+  }) {
+    return BottomNavigationBarItem(
+      icon: (_isDrawerOpen && index == 4) || _selectedIndex == index
+          ? (iconPath != null
+              ? SvgPicture.asset(
+                  iconPath,
+                  color: Theme.of(context).primaryColor,
+                  width: 22,
+                )
+              : Icon(
+                  iconData,
+                  color: Theme.of(context).primaryColor,
+                  size: 22,
+                ))
+          : (iconPath != null
+              ? SvgPicture.asset(
+                  iconPath,
+                  color: Theme.of(context).disabledColor,
+                  width: 22,
+                )
+              : Icon(
+                  iconData,
+                  color: Theme.of(context).disabledColor,
+                  size: 22,
+                )),
+      label: label,
     );
   }
 }

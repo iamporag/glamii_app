@@ -16,21 +16,22 @@ class SplashScreen extends StatelessWidget {
     });
     final theme = Theme.of(context);
     return Scaffold(
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            const Spacer(),
             SvgPicture.asset(
               Images.LOGO,
               width: 220,
             ),
-            const SizedBox(
-              height: Dimensions.FREE_SIZE_DEFAULT,
-            ),
+            const Spacer(),
             CircularProgressIndicator(
               strokeWidth: 3.0,
               color: theme.primaryColor,
             ),
+            const SizedBox(height: Dimensions.FREE_SIZE_EXTRA_LARGE),
           ],
         ),
       ),

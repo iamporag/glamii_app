@@ -15,25 +15,25 @@ class FeaturedServiceDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          service['title']!,
-          style: giazaStencilRegular.copyWith(
-            color: theme.cardColor,
-          ),
-        ),
-        backgroundColor: const Color(0xFF75140C),
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   title: Text(
+      //     service['title']!,
+      //     style: giazaStencilRegular.copyWith(
+      //       color: theme.cardColor,
+      //     ),
+      //   ),
+      //   backgroundColor: const Color(0xFF75140C),
+      //   centerTitle: true,
+      //   leading: IconButton(
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //     icon: const Icon(
+      //       Icons.arrow_back,
+      //       color: Colors.white,
+      //     ),
+      //   ),
+      // ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
