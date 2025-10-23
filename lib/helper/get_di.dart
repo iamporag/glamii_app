@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:glamii_app/controller/navigation_controller.dart';
 import 'package:glamii_app/controller/reward_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
@@ -25,6 +26,7 @@ Future<Map<String, Map<String, String>>> init() async {
 
   // Repository
   Get.lazyPut(() => SplashController());
+  Get.lazyPut(() => NavigationController());
   Get.lazyPut(
     () => AuthRepo(apiClient: Get.find(), sharedPreferences: Get.find()),
   );

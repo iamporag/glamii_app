@@ -1,68 +1,148 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../controller/navigation_controller.dart';
 
-import '../screens/calendar/calendar_screen.dart';
-import '../screens/category/categories_screen.dart';
-import '../screens/feature_service/featured_services_screen.dart';
-import '../screens/profile/profile_screen.dart';
+import '../../theme/light_theme.dart';
+import '../../util/dimensions.dart';
+import '../../util/styles.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class Navbar extends StatefulWidget {
-  const Navbar({super.key});
+class NavigationBarScreen extends StatelessWidget {
+  NavigationBarScreen({super.key});
 
-  @override
-  _NavbarState createState() => _NavbarState();
-}
+  final NavigationController controller = Get.put(NavigationController());
 
-class _NavbarState extends State<Navbar> {
-  // The current index of the selected bottom navigation item
-  int _selectedIndex = 0;
+  static DateTime? _lastBackPressTime;
 
-  // List of screens for each navigation tab
-  final List<Widget> _screens = [
-    FeaturedServicesScreen(),
-    CategoriesScreen(),
-    const CalendarScreen(),
-    // RewardsWalletScreen(),
-    const ProfileScreen(),
-  ];
+  Future<bool> _onWillPop(BuildContext context) async {
+    final now = DateTime.now();
+    final difference =
+        _lastBackPressTime == null ? null : now.difference(_lastBackPressTime!);
 
-  // Method to update the selected index
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (difference == null || difference > const Duration(seconds: 2)) {
+      _lastBackPressTime = now;
+      final messenger = ScaffoldMessenger.of(context);
+      messenger.showSnackBar(
+        const SnackBar(
+          content: Text("Press back again to exit"),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return false;
+    }
+    return true;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _screens[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: const Color(0xFF75140c),
-        unselectedItemColor: Colors.grey,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+    final theme = Theme.of(context);
+
+    return WillPopScope(
+      onWillPop: () => _onWillPop(context),
+      child: Obx(
+        () => Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          extendBody: true,
+          body: controller.pages[controller.selectedIndex.value],
+          bottomNavigationBar: Container(
+            height: controller.barHeight,
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
+            decoration: BoxDecoration(
+              color: theme.cardColor,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.07),
+                  blurRadius: 10,
+                  offset: const Offset(0, -1),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _navItem(
+                  context,
+                  index: 0,
+                  iconData: Icons.home_max,
+                  label: "Home",
+                ),
+                _navItem(
+                  context,
+                  index: 1,
+                  iconData: Icons.favorite,
+                  label: "Favorites",
+                ),
+                _navItem(
+                  context,
+                  index: 2,
+                  iconData: Icons.calendar_month,
+                  label: "Calendar",
+                ),
+                _navItem(
+                  context,
+                  index: 3,
+                  iconData: Icons.account_circle,
+                  label: "Profile",
+                ),
+              ],
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: 'Categories',
+        ),
+      ),
+    );
+  }
+
+  Widget _navItem(BuildContext context,
+      {required int index,
+      String? icon,
+      required String label,
+      IconData? iconData}) {
+    final theme = Theme.of(context);
+    final bool isSelected = controller.selectedIndex.value == index;
+
+    return GestureDetector(
+      onTap: () => controller.changePage(index),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 250),
+            padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_EXTRA_SMALL),
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? AppColor.primary.withOpacity(0.9)
+                  : Colors.transparent,
+              shape: BoxShape.circle,
+            ),
+            child: icon != null
+                ? SvgPicture.asset(
+                    icon,
+                    width: 20,
+                    color: isSelected
+                        ? AppColor.primary
+                        : Colors.grey.withOpacity(0.7),
+                  )
+                : Icon(
+                    iconData,
+                    size: 20,
+                    color: isSelected
+                        ? AppColor.cardColor
+                        : Colors.grey.withOpacity(0.7),
+                  ),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Calendar',
-          ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.wallet_travel),
-          //   label: 'Rewards',
-          // ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Profile',
+          Text(
+            label,
+            style: bodyMediumText(context)!.copyWith(
+              fontSize: Dimensions.FONT_SIZE_SMALL,
+              color: isSelected
+                  ? Get.isDarkMode
+                      ? AppColor.cardColor
+                      : theme.primaryColor
+                  : Theme.of(context).disabledColor,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.w400,
+            ),
           ),
         ],
       ),

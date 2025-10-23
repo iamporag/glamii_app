@@ -2,10 +2,16 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:glamii_app/util/app_constants.dart';
 import 'package:glamii_app/util/dimensions.dart';
 import 'package:glamii_app/util/styles.dart';
+import 'package:glamii_app/view/screens/feature_service/widgets/home_appbar.dart';
 
+import '../../../controller/greeting_controller.dart';
+import '../../../controller/theme_controller.dart';
+import '../../../theme/light_theme.dart';
+import '../../base/custom_icon_button.dart';
 import '../notification/notifications_screen.dart';
 import '../rewards/rewards_wallet_screen.dart';
 import 'widgets/featured_service_detail_screen.dart';
@@ -110,50 +116,15 @@ Experience a professional haircut that goes beyond expectations, offering a tail
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            AppConstants.APP_NAME,
-            style: giazaStencilBold.copyWith(
-              color: theme.cardColor,
-            ),
-          ),
-          backgroundColor: theme.primaryColor,
-          actions: [
-            const RewardPoint(),
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NotificationsScreen(),
-                  ),
-                );
-              },
-              icon: const Icon(
-                Icons.notifications,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
+        backgroundColor: theme.scaffoldBackgroundColor,
+        appBar: const HomeAppbar(),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ListTile(
-                title: Text(
-                  "Hello, Emma Oliver!",
-                  style: giazaStencilBlack.copyWith(
-                    fontSize: Dimensions.FONT_SIZE_LARGE,
-                    color: theme.primaryColor,
-                  ),
-                ),
-                subtitle: Text(
-                  "Welcome to Glamii App",
-                  style: theme.textTheme.bodySmall,
-                ),
-              ),
               CarouselSlider.builder(
                 itemCount: featuredServices.length,
                 itemBuilder: (context, index, realIndex) {
@@ -167,7 +138,8 @@ Experience a professional haircut that goes beyond expectations, offering a tail
                               BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
                           child: Image.network(
                             service['imageUrl']!,
-                            width: MediaQuery.of(context).size.width,
+                            width: screenWidth,
+                            height: screenHeight,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -175,10 +147,12 @@ Experience a professional haircut that goes beyond expectations, offering a tail
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(
                                 Dimensions.RADIUS_DEFAULT),
-                            gradient: const LinearGradient(
+                            gradient: LinearGradient(
                               colors: [
                                 Colors.transparent,
-                                Colors.black,
+                                Get.isDarkMode
+                                    ? theme.cardColor
+                                    : AppColor.blackColor,
                               ],
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
@@ -271,25 +245,36 @@ Experience a professional haircut that goes beyond expectations, offering a tail
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(service['title']!,
-                                          style: giazaStencilBlack.copyWith(
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                          )),
+                                      Text(
+                                        service['title']!,
+                                        style: giazaStencilBlack.copyWith(
+                                          fontSize: Dimensions.FONT_SIZE_LARGE,
+                                          color: Get.isDarkMode
+                                              ? theme
+                                                  .textTheme.displayLarge?.color
+                                              : AppColor.cardColor,
+                                        ),
+                                      ),
                                       Text(
                                         service['description']!,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         style: theme.textTheme.bodyMedium
                                             ?.copyWith(
-                                          color: theme.cardColor,
+                                          color: Get.isDarkMode
+                                              ? theme
+                                                  .textTheme.displayLarge?.color
+                                              : AppColor.cardColor,
                                         ),
                                       ),
                                       Text(
                                         'Price: ${service['price']}',
                                         style: theme.textTheme.bodyMedium
                                             ?.copyWith(
-                                          color: theme.cardColor,
+                                          color: Get.isDarkMode
+                                              ? theme
+                                                  .textTheme.displayLarge?.color
+                                              : AppColor.cardColor,
                                         ),
                                       ),
                                       const Row(
@@ -364,6 +349,9 @@ Experience a professional haircut that goes beyond expectations, offering a tail
                 height: Dimensions.FREE_SIZE_DEFAULT,
               ),
               AllServicesArea(featuredServices: featuredServices),
+              const SizedBox(
+                height: 50000,
+              )
             ],
           ),
         ));
@@ -512,56 +500,80 @@ class FeaturedServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SizedBox(
       width: 220,
       child: Card(
-        elevation: 1,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
         ),
+        elevation: 3,
+        clipBehavior: Clip.antiAlias,
+        color: theme.cardColor,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(Dimensions.RADIUS_DEFAULT),
-                topRight: Radius.circular(Dimensions.RADIUS_DEFAULT),
-              ),
-              child: Image.network(
-                service['imageUrl']!,
-                height: 90,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
-              ),
+            // Image with overlay title
+            Stack(
+              children: [
+                AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: Image.network(
+                    service['imageUrl']!,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.black.withOpacity(0.7),
+                          Colors.transparent,
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
+                    ),
+                    child: Text(
+                      service['title']!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
+
+            // Description and review
             Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    service['title']!,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontFamily: 'GiazaStencil',
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF75140C),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
                     service['description']!,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontFamily: 'TTChocolates',
-                      fontSize: 14,
-                      color: Colors.black,
+                      fontSize: 13,
+                      color: Get.isDarkMode
+                          ? theme.textTheme.bodyMedium?.color
+                          : AppColor.darkBlueColor,
                     ),
                   ),
+                  const SizedBox(height: 6),
                   ServiceReviewRow(service: service),
                 ],
               ),
@@ -583,51 +595,52 @@ class ServiceReviewRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           'Price: ${service['price']}',
-          style: const TextStyle(
-            fontFamily: 'TTChocolates',
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
+          style: bodyMediumText(context)?.copyWith(
+            color: Get.isDarkMode
+                ? theme.textTheme.displayLarge?.color
+                : AppColor.darkBlueColor,
           ),
           textAlign: TextAlign.center,
         ),
-        const Row(
+        Row(
           children: [
-            Icon(
+            const Icon(
               Icons.star,
               size: 14,
               color: Colors.amber,
             ),
-            Icon(
+            const Icon(
               Icons.star,
               size: 14,
               color: Colors.amber,
             ),
-            Icon(
+            const Icon(
               Icons.star,
               size: 14,
               color: Colors.amber,
             ),
-            Icon(
+            const Icon(
               Icons.star,
               size: 14,
               color: Colors.amber,
             ),
-            Icon(
+            const Icon(
               Icons.star,
               size: 14,
               color: Colors.amber,
             ),
             Text(
               '(5k)',
-              style: TextStyle(
-                fontFamily: 'TTChocolates',
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
+              style: bodyMediumText(context)?.copyWith(
+                color: Get.isDarkMode
+                    ? theme.textTheme.displayLarge?.color
+                    : AppColor.darkBlueColor,
               ),
               textAlign: TextAlign.center,
             ),
@@ -661,7 +674,9 @@ class TitleWidget extends StatelessWidget {
           Text(
             title,
             style: giazaStencilBlack.copyWith(
-              color: theme.primaryColor,
+              color: Get.isDarkMode
+                  ? theme.textTheme.displayLarge?.color
+                  : AppColor.primary,
             ),
           ),
           trailing != null

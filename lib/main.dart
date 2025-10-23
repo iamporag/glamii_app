@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'controller/localization_controller.dart';
 import 'controller/theme_controller.dart';
@@ -43,6 +44,29 @@ class MyApp extends StatelessWidget {
                 AppConstants.languages[0].countryCode,
               ),
               transitionDuration: const Duration(milliseconds: 500),
+              builder: (context, child) {
+                final theme = Theme.of(context);
+                final isDark = theme.brightness == Brightness.dark;
+
+                return AnnotatedRegion<SystemUiOverlayStyle>(
+                  value: SystemUiOverlayStyle(
+                    statusBarColor: Colors.transparent,
+                    statusBarIconBrightness:
+                        isDark ? Brightness.light : Brightness.dark,
+                    systemNavigationBarColor: theme.cardColor, // Android only
+                    systemNavigationBarIconBrightness:
+                        isDark ? Brightness.light : Brightness.dark,
+                  ),
+                  child: Container(
+                    color: theme.cardColor,
+                    child: SafeArea(
+                      top: false,
+                      bottom: true,
+                      child: child!,
+                    ),
+                  ),
+                );
+              },
             );
           },
         );
