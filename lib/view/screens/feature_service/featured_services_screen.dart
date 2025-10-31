@@ -1,18 +1,16 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:glamii_app/util/app_constants.dart';
 import 'package:glamii_app/util/dimensions.dart';
 import 'package:glamii_app/util/styles.dart';
 import 'package:glamii_app/view/screens/feature_service/widgets/home_appbar.dart';
+import 'package:shimmer/shimmer.dart';
 
-import '../../../controller/greeting_controller.dart';
-import '../../../controller/theme_controller.dart';
 import '../../../theme/light_theme.dart';
-import '../../base/custom_icon_button.dart';
-import '../notification/notifications_screen.dart';
 import '../rewards/rewards_wallet_screen.dart';
 import 'widgets/featured_service_detail_screen.dart';
 import '../rewards/widgets/service_card.dart';
@@ -22,7 +20,7 @@ class FeaturedServicesScreen extends StatelessWidget {
   final List<Map<String, String>> featuredServices = [
     {
       'imageUrl':
-          'https://images.pexels.com/photos/19641830/pexels-photo-19641830/free-photo-of-woman-lying-on-a-massage-table-and-getting-a-massage.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/6621070/pexels-photo-6621070.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'title': 'Luxury Spa Treatment',
       'description': 'Relax and rejuvenate with our exclusive spa treatment.',
       'price': '\$25',
@@ -30,87 +28,82 @@ class FeaturedServicesScreen extends StatelessWidget {
     },
     {
       'imageUrl':
-          'https://images.pexels.com/photos/18186520/pexels-photo-18186520/free-photo-of-hairdresser-cutting-hairs.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/3993447/pexels-photo-3993447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'title': 'Professional Hair Styling',
       'description':
-          """A professional hairstyle is more than just a haircut—it's an expression of personality, a reflection of confidence, and a statement of elegance. At our salon, we believe that the right hairstyle can transform not just your look, but your entire mood and outlook. Our team of expert stylists combines their extensive training with a keen eye for trends and timeless techniques to deliver exceptional results. From sleek, sophisticated cuts to voluminous waves, we offer a wide range of styles tailored to your unique hair type, face shape, and lifestyle needs. Whether you're preparing for a special occasion or just need a fresh, everyday look, our stylists are committed to making you feel beautiful and empowered.
-
-Each consultation begins with a personal discussion about your hair goals, lifestyle, and maintenance preferences. We use only high-quality products to ensure your hair not only looks great but remains healthy and vibrant. Our services range from precision cuts and color treatments to extensions, balayage, and keratin treatments. We take into account the latest trends while also focusing on styles that work best for your hair texture and face shape.
-
-Experience a professional haircut that goes beyond expectations, offering a tailored experience that suits you. Whether it's a short bob, long layers, or a bold pixie cut, our stylists take the time to ensure you walk out of our salon with a look you love, all while maintaining the health and integrity of your hair. Elevate your appearance with the perfect professional hairstyle that complements your individual beauty.""",
-      'price': '\$25',
-      'duration': '30 mins',
+          'Transform your look with expert cuts and styles suited to your personality.',
+      'price': '\$35',
+      'duration': '45 mins',
     },
     {
       'imageUrl':
-          'https://images.pexels.com/photos/15530661/pexels-photo-15530661/free-photo-of-beautician-putting-make-up-on-a-customer-face.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/3997990/pexels-photo-3997990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'title': 'Makeup Artistry',
       'description': 'Perfect your look with a professional makeup session.',
-      'price': '\$25',
-      'duration': '30 mins',
+      'price': '\$40',
+      'duration': '1 hour',
     },
     {
       'imageUrl':
-          'https://images.pexels.com/photos/4677856/pexels-photo-4677856.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/8534278/pexels-photo-8534278.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'title': 'Nail Art & Manicure',
       'description':
           'Get creative with customized nail art and a relaxing manicure.',
-      'price': '\$25',
-      'duration': '30 mins',
+      'price': '\$20',
+      'duration': '40 mins',
     },
     {
       'imageUrl':
-          'https://images.pexels.com/photos/29151228/pexels-photo-29151228/free-photo-of-young-woman-applying-mascara-close-up-shot.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/6621445/pexels-photo-6621445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'title': 'Personalized Skincare',
       'description':
           'Experience skincare tailored to your skin type and needs.',
-      'price': '\$25',
+      'price': '\$30',
       'duration': '30 mins',
     },
     {
       'imageUrl':
-          'https://images.pexels.com/photos/14253964/pexels-photo-14253964.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/3865792/pexels-photo-3865792.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'title': 'Massage Therapy',
       'description':
           'Unwind with a full-body massage to relieve stress and tension.',
-      'price': '\$25',
-      'duration': '30 mins',
+      'price': '\$45',
+      'duration': '1 hour',
     },
     {
       'imageUrl':
-          'https://images.pexels.com/photos/8826403/pexels-photo-8826403.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/8534276/pexels-photo-8534276.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'title': 'Eyebrow Shaping',
-      'description':
-          'Enhance your features with expert eyebrow shaping services.',
-      'price': '\$25',
-      'duration': '30 mins',
+      'description': 'Enhance your features with expert eyebrow shaping.',
+      'price': '\$15',
+      'duration': '20 mins',
     },
     {
       'imageUrl':
-          'https://images.pexels.com/photos/5304839/pexels-photo-5304839.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/8534081/pexels-photo-8534081.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'title': 'Bridal Package',
       'description': 'Complete bridal beauty package for your special day.',
-      'price': '\$25',
+      'price': '\$120',
+      'duration': '3 hours',
     },
     {
       'imageUrl':
-          'https://images.pexels.com/photos/5240819/pexels-photo-5240819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/3738346/pexels-photo-3738346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'title': 'Anti-Aging Facial',
       'description':
           'Rejuvenate with our specialized anti-aging facial treatment.',
-      'price': '\$25',
-      'duration': '30 mins',
+      'price': '\$35',
+      'duration': '45 mins',
     },
     {
       'imageUrl':
-          'https://images.pexels.com/photos/28994645/pexels-photo-28994645/free-photo-of-applying-hair-spray-to-long-red-hair-indoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'title': 'Hair Coloring',
       'description':
           'Refresh or reinvent your style with expert hair coloring.',
-      'price': '\$25',
-      'duration': '30 mins',
+      'price': '\$50',
+      'duration': '1.5 hours',
     },
-    // Add more services as needed
   ];
 
   @override
@@ -125,213 +118,8 @@ Experience a professional haircut that goes beyond expectations, offering a tail
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CarouselSlider.builder(
-                itemCount: featuredServices.length,
-                itemBuilder: (context, index, realIndex) {
-                  final service = featuredServices[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
-                          child: Image.network(
-                            service['imageUrl']!,
-                            width: screenWidth,
-                            height: screenHeight,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                                Dimensions.RADIUS_DEFAULT),
-                            gradient: LinearGradient(
-                              colors: [
-                                Colors.transparent,
-                                Get.isDarkMode
-                                    ? theme.cardColor
-                                    : AppColor.blackColor,
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              top: 20.0,
-                            ),
-                            child: Container(
-                              height: 30,
-                              width: MediaQuery.of(context).size.width / 4.2,
-                              decoration: const BoxDecoration(
-                                color: Colors.amber,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(100),
-                                    bottomLeft: Radius.circular(100)),
-                              ),
-                              child: Center(
-                                  child: RichText(
-                                      text: TextSpan(
-                                          text: "Upto ",
-                                          style: giazaStencilMedium.copyWith(
-                                            color: theme.primaryColor,
-                                          ),
-                                          children: [
-                                    TextSpan(
-                                      text: "50% 🔥",
-                                      style:
-                                          theme.textTheme.bodyMedium?.copyWith(
-                                        color: theme.primaryColor,
-                                      ),
-                                    ),
-                                  ]))),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          left: 0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(
-                                Dimensions.PADDING_SIZE_SMALL),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 5,
-                                      height: 30,
-                                      color: Colors.amber,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          4.2,
-                                      height: 30,
-                                      decoration: const BoxDecoration(
-                                        color: Colors.amber,
-                                        borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(100),
-                                          bottomRight: Radius.circular(100),
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "Get Discount",
-                                          style: giazaStencilBlack.copyWith(
-                                            color: theme.primaryColor,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width / 1.3,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        service['title']!,
-                                        style: giazaStencilBlack.copyWith(
-                                          fontSize: Dimensions.FONT_SIZE_LARGE,
-                                          color: Get.isDarkMode
-                                              ? theme
-                                                  .textTheme.displayLarge?.color
-                                              : AppColor.cardColor,
-                                        ),
-                                      ),
-                                      Text(
-                                        service['description']!,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: theme.textTheme.bodyMedium
-                                            ?.copyWith(
-                                          color: Get.isDarkMode
-                                              ? theme
-                                                  .textTheme.displayLarge?.color
-                                              : AppColor.cardColor,
-                                        ),
-                                      ),
-                                      Text(
-                                        'Price: ${service['price']}',
-                                        style: theme.textTheme.bodyMedium
-                                            ?.copyWith(
-                                          color: Get.isDarkMode
-                                              ? theme
-                                                  .textTheme.displayLarge?.color
-                                              : AppColor.cardColor,
-                                        ),
-                                      ),
-                                      const Row(
-                                        children: [
-                                          Icon(
-                                            Icons.star,
-                                            size: 14,
-                                            color: Colors.amber,
-                                          ),
-                                          Icon(
-                                            Icons.star,
-                                            size: 14,
-                                            color: Colors.amber,
-                                          ),
-                                          Icon(
-                                            Icons.star,
-                                            size: 14,
-                                            color: Colors.amber,
-                                          ),
-                                          Icon(
-                                            Icons.star,
-                                            size: 14,
-                                            color: Colors.amber,
-                                          ),
-                                          Icon(
-                                            Icons.star,
-                                            size: 14,
-                                            color: Colors.amber,
-                                          ),
-                                          Text(
-                                            '(5k)',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'TTChocolates',
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                options: CarouselOptions(
-                  aspectRatio: 9 / 6,
-                  viewportFraction: 0.9,
-                  initialPage: 0,
-                ),
+              FeaturedServicesCarousel(
+                featuredServices: featuredServices,
               ),
               const SizedBox(
                 height: Dimensions.FREE_SIZE_DEFAULT,
@@ -349,9 +137,6 @@ Experience a professional haircut that goes beyond expectations, offering a tail
                 height: Dimensions.FREE_SIZE_DEFAULT,
               ),
               AllServicesArea(featuredServices: featuredServices),
-              const SizedBox(
-                height: 50000,
-              )
             ],
           ),
         ));
@@ -491,94 +276,130 @@ class FeatureServiceArea extends StatelessWidget {
 }
 
 class FeaturedServiceCard extends StatelessWidget {
+  final Map<String, String> service;
+
   const FeaturedServiceCard({
     super.key,
     required this.service,
   });
 
-  final Map<String, String> service;
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SizedBox(
-      width: 220,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
-        ),
-        elevation: 3,
-        clipBehavior: Clip.antiAlias,
-        color: theme.cardColor,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Image with overlay title
-            Stack(
-              children: [
-                AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: Image.network(
-                    service['imageUrl']!,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.black.withOpacity(0.7),
-                          Colors.transparent,
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
-                    ),
-                    child: Text(
-                      service['title']!,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+    final isDark = Get.isDarkMode;
+    final imageUrl = service['imageUrl'] ?? '';
+    final title = service['title'] ?? '';
+    final description = service['description'] ?? '';
 
-            // Description and review
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return GestureDetector(
+      onTap: () {},
+      child: AnimatedScale(
+        duration: const Duration(milliseconds: 150),
+        scale: 1.0,
+        child: Container(
+          width: 220,
+          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          decoration: BoxDecoration(
+            color: isDark ? Colors.grey[900] : Colors.white,
+            borderRadius: BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
+            boxShadow: [
+              BoxShadow(
+                color: isDark
+                    ? Colors.black.withOpacity(0.45)
+                    : Colors.blueGrey.withOpacity(0.15),
+                blurRadius: 15,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // --- Image with shimmer & glass overlay title ---
+              Stack(
                 children: [
-                  Text(
-                    service['description']!,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontFamily: 'TTChocolates',
-                      fontSize: 13,
-                      color: Get.isDarkMode
-                          ? theme.textTheme.bodyMedium?.color
-                          : AppColor.darkBlueColor,
+                  AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(Dimensions.RADIUS_DEFAULT),
+                      ),
+                      child: Image.network(
+                        imageUrl,
+                        fit: BoxFit.cover,
+                        loadingBuilder: (context, child, progress) {
+                          if (progress == null) return child;
+                          return Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Container(color: Colors.grey[300]),
+                          );
+                        },
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          color: Colors.grey[200],
+                          child: const Icon(Icons.image_not_supported,
+                              color: Colors.grey, size: 40),
+                        ),
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 6),
-                  ServiceReviewRow(service: service),
+                  Positioned(
+                    bottom: 10,
+                    left: 10,
+                    right: 10,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+                        child: Container(
+                          color: Colors.black.withOpacity(0.35),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 4),
+                          child: Text(
+                            title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14.5,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-            ),
-          ],
+
+              // --- Description & Review Section ---
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      description,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontFamily: 'TTChocolates',
+                        fontSize: 13,
+                        height: 1.4,
+                        color: isDark
+                            ? theme.textTheme.bodyMedium?.color
+                            : AppColor.darkBlueColor.withOpacity(0.9),
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    ServiceReviewRow(service: service),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -693,6 +514,264 @@ class TitleWidget extends StatelessWidget {
                 )
               : const SizedBox.shrink(),
         ],
+      ),
+    );
+  }
+}
+
+class FeaturedServicesCarousel extends StatelessWidget {
+  final List<Map<String, String>> featuredServices;
+
+  const FeaturedServicesCarousel({
+    super.key,
+    required this.featuredServices,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = 260.0;
+
+    return CarouselSlider.builder(
+      itemCount: featuredServices.length,
+      itemBuilder: (context, index, realIndex) {
+        final service = featuredServices[index];
+        final imageUrl = service['imageUrl'] ?? '';
+        final title = service['title'] ?? '';
+        final description = service['description'] ?? '';
+        final price = service['price'] ?? 'N/A';
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: GestureDetector(
+            onTap: () {
+              // TODO: Implement full preview screen with Hero animation
+            },
+            child: Hero(
+              tag: '${service['imageUrl']}_$index',
+              child: ClipRRect(
+                borderRadius:
+                    BorderRadius.circular(Dimensions.RADIUS_EXTRA_LARGE),
+                child: Stack(
+                  children: [
+                    // ---- Background Image ----
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeOut,
+                      child: Image.network(
+                        imageUrl,
+                        width: screenWidth,
+                        height: screenHeight,
+                        fit: BoxFit.cover,
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Container(
+                            width: screenWidth,
+                            height: screenHeight,
+                            color: Colors.grey[300],
+                          );
+                        },
+                        errorBuilder: (context, error, stack) => Container(
+                          color: Colors.grey.shade200,
+                          alignment: Alignment.center,
+                          child: const Icon(Icons.image_not_supported,
+                              size: 40, color: Colors.grey),
+                        ),
+                      ),
+                    ),
+
+                    // ---- Gradient Overlay ----
+                    Container(
+                      height: screenHeight,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.transparent,
+                            Get.isDarkMode
+                                ? theme.cardColor.withOpacity(0.95)
+                                : AppColor.blackColor.withOpacity(0.85),
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                    ),
+
+                    // ---- Discount Badge ----
+                    Positioned(
+                      top: 20,
+                      right: 0,
+                      child: Container(
+                        height: 36,
+                        width: screenWidth / 4,
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Colors.amber, Colors.orangeAccent],
+                          ),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(100),
+                            bottomLeft: Radius.circular(100),
+                          ),
+                        ),
+                        child: Center(
+                          child: RichText(
+                            text: TextSpan(
+                              text: "Upto ",
+                              style: giazaStencilMedium.copyWith(
+                                color: Colors.black,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: "50% 🔥",
+                                  style: giazaStencilBlack.copyWith(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    // ---- Bottom Details ----
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // -- “Get Discount” Banner --
+                            Row(
+                              children: [
+                                Container(
+                                  width: 5,
+                                  height: 28,
+                                  decoration: BoxDecoration(
+                                    color: Colors.amber.shade700,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                Container(
+                                  width: screenWidth / 4,
+                                  height: 28,
+                                  decoration: const BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [Colors.amber, Colors.orange],
+                                    ),
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(100),
+                                      bottomRight: Radius.circular(100),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Get Discount",
+                                      style: giazaStencilBlack.copyWith(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 6),
+
+                            // -- Title & Description --
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                width: screenWidth / 1.2,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      title,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: giazaStencilBlack.copyWith(
+                                        fontSize:
+                                            Dimensions.FONT_SIZE_LARGE + 1,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 2),
+                                    Text(
+                                      description,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style:
+                                          theme.textTheme.bodyMedium?.copyWith(
+                                        color: Colors.white.withOpacity(0.9),
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Price: $price',
+                                      style:
+                                          theme.textTheme.bodyMedium?.copyWith(
+                                        color: Colors.amberAccent,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+
+                                    // Stars
+                                    const Row(
+                                      children: [
+                                        Icon(Icons.star,
+                                            size: 14, color: Colors.amber),
+                                        Icon(Icons.star,
+                                            size: 14, color: Colors.amber),
+                                        Icon(Icons.star,
+                                            size: 14, color: Colors.amber),
+                                        Icon(Icons.star,
+                                            size: 14, color: Colors.amber),
+                                        Icon(Icons.star,
+                                            size: 14, color: Colors.amber),
+                                        SizedBox(width: 4),
+                                        Text(
+                                          '(5k)',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: 'TTChocolates',
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      options: CarouselOptions(
+        height: 260,
+        aspectRatio: 16 / 9,
+        viewportFraction: 0.8,
+        enlargeCenterPage: true,
+        autoPlay: true,
+        autoPlayInterval: const Duration(seconds: 4),
+        autoPlayAnimationDuration: const Duration(milliseconds: 800),
+        scrollDirection: Axis.horizontal,
       ),
     );
   }
