@@ -429,44 +429,7 @@ class ServiceReviewRow extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-        Row(
-          children: [
-            const Icon(
-              Icons.star,
-              size: 14,
-              color: Colors.amber,
-            ),
-            const Icon(
-              Icons.star,
-              size: 14,
-              color: Colors.amber,
-            ),
-            const Icon(
-              Icons.star,
-              size: 14,
-              color: Colors.amber,
-            ),
-            const Icon(
-              Icons.star,
-              size: 14,
-              color: Colors.amber,
-            ),
-            const Icon(
-              Icons.star,
-              size: 14,
-              color: Colors.amber,
-            ),
-            Text(
-              '(5k)',
-              style: bodyMediumText(context)?.copyWith(
-                color: Get.isDarkMode
-                    ? theme.textTheme.displayLarge?.color
-                    : AppColor.darkBlueColor,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
+        ratingBadge()
       ],
     );
   }
@@ -724,30 +687,7 @@ class FeaturedServicesCarousel extends StatelessWidget {
                                     const SizedBox(height: 4),
 
                                     // Stars
-                                    const Row(
-                                      children: [
-                                        Icon(Icons.star,
-                                            size: 14, color: Colors.amber),
-                                        Icon(Icons.star,
-                                            size: 14, color: Colors.amber),
-                                        Icon(Icons.star,
-                                            size: 14, color: Colors.amber),
-                                        Icon(Icons.star,
-                                            size: 14, color: Colors.amber),
-                                        Icon(Icons.star,
-                                            size: 14, color: Colors.amber),
-                                        SizedBox(width: 4),
-                                        Text(
-                                          '(5k)',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'TTChocolates',
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                    ratingBadge()
                                   ],
                                 ),
                               ),
@@ -775,4 +715,32 @@ class FeaturedServicesCarousel extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget ratingBadge() {
+  return Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      const Icon(Icons.star, color: Colors.amber, size: 14),
+      const SizedBox(width: 3),
+      Text(
+        "5.0",
+        style: TextStyle(
+          fontFamily: 'TTChocolates',
+          fontWeight: FontWeight.w700,
+          fontSize: 13,
+          color: Colors.white,
+        ),
+      ),
+      const SizedBox(width: 4),
+      Text(
+        "(5k)",
+        style: TextStyle(
+          fontFamily: 'TTChocolates',
+          fontSize: 12,
+          color: Colors.white.withOpacity(0.9),
+        ),
+      ),
+    ],
+  );
 }
