@@ -5,8 +5,6 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../theme/light_theme.dart';
 import '../../feature_service/featured_services_screen.dart';
 import 'dart:ui';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ServiceCard extends StatelessWidget {
   final String imageUrl;

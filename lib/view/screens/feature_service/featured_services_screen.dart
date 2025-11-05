@@ -20,7 +20,7 @@ class FeaturedServicesScreen extends StatelessWidget {
   final List<Map<String, String>> featuredServices = [
     {
       'imageUrl':
-          'https://images.pexels.com/photos/6621070/pexels-photo-6621070.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg',
       'title': 'Luxury Spa Treatment',
       'description': 'Relax and rejuvenate with our exclusive spa treatment.',
       'price': '\$25',
@@ -28,7 +28,7 @@ class FeaturedServicesScreen extends StatelessWidget {
     },
     {
       'imageUrl':
-          'https://images.pexels.com/photos/3993447/pexels-photo-3993447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/973403/pexels-photo-973403.jpeg',
       'title': 'Professional Hair Styling',
       'description':
           'Transform your look with expert cuts and styles suited to your personality.',
@@ -37,7 +37,7 @@ class FeaturedServicesScreen extends StatelessWidget {
     },
     {
       'imageUrl':
-          'https://images.pexels.com/photos/3997990/pexels-photo-3997990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/1654834/pexels-photo-1654834.jpeg',
       'title': 'Makeup Artistry',
       'description': 'Perfect your look with a professional makeup session.',
       'price': '\$40',
@@ -88,7 +88,7 @@ class FeaturedServicesScreen extends StatelessWidget {
     },
     {
       'imageUrl':
-          'https://images.pexels.com/photos/3738346/pexels-photo-3738346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/3268732/pexels-photo-3268732.jpeg',
       'title': 'Anti-Aging Facial',
       'description':
           'Rejuvenate with our specialized anti-aging facial treatment.',
@@ -494,7 +494,7 @@ class FeaturedServicesCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = 260.0;
+    const screenHeight = 260.0;
 
     return CarouselSlider.builder(
       itemCount: featuredServices.length,
@@ -723,7 +723,7 @@ Widget ratingBadge() {
     children: [
       const Icon(Icons.star, color: Colors.amber, size: 14),
       const SizedBox(width: 3),
-      Text(
+      const Text(
         "5.0",
         style: TextStyle(
           fontFamily: 'TTChocolates',

@@ -28,11 +28,11 @@ class _FeaturedServiceDetailScreenState
       'price': '\$20',
       'duration': '40 mins',
       'images': [
-        'https://images.pexels.com/photos/8534278/pexels-photo-8534278.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        'https://images.pexels.com/photos/3959156/pexels-photo-3959156.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        'https://images.pexels.com/photos/3757940/pexels-photo-3757940.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        'https://images.pexels.com/photos/3993552/pexels-photo-3993552.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        'https://images.pexels.com/photos/3764411/pexels-photo-3764411.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/3065171/pexels-photo-3065171.jpeg',
+        'https://images.pexels.com/photos/2799605/pexels-photo-2799605.jpeg',
+        'https://images.pexels.com/photos/3331486/pexels-photo-3331486.jpeg',
+        'https://images.pexels.com/photos/3993467/pexels-photo-3993467.jpeg',
+        'https://images.pexels.com/photos/3993324/pexels-photo-3993324.jpeg',
       ],
     };
 
@@ -363,6 +363,7 @@ class FullScreenImageViewer extends StatefulWidget {
   final int initialIndex;
 
   const FullScreenImageViewer({
+    super.key,
     required this.images,
     this.initialIndex = 0,
   });

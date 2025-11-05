@@ -31,9 +31,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? Text(
               title!,
               textAlign: TextAlign.center,
-              style: bodyMediumText(context)!.copyWith(
+              style: displayLargeText(context)!.copyWith(
                   color: Get.isDarkMode
-                      ? theme.textTheme.bodyLarge!.color
+                      ? AppColor.cardColor
                       : AppColor.splashBlueTittleColor,
                   fontSize: Dimensions.FONT_SIZE_LARGE),
             )

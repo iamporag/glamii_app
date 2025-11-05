@@ -1,36 +1,32 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
 
-import '../notification/notifications_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:glamii_app/util/dimensions.dart';
+
+import '../../../theme/light_theme.dart';
+import '../../../util/styles.dart';
+import '../../base/custom_app_bar.dart';
+import '../../base/custom_icon_button.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Profile',
-          style: TextStyle(
-            fontFamily: 'GiazaStencil',
-            color: Colors.white,
-          ),
-        ),
+      appBar: CustomAppBar(
+        title: 'Calendar',
+        isBackButtonExist: false,
         actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => NotificationsScreen()));
-              },
-              icon: const Icon(
-                Icons.notifications,
-                color: Colors.white,
-              ))
+          CustomIconButton(
+            onPressed: () {},
+            isImage: false,
+            iconName: Icons.notifications_outlined,
+            iconColor: Get.isDarkMode ? AppColor.cardColor : AppColor.primary,
+          ),
         ],
-        backgroundColor: const Color(0xFF75140C),
-        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -40,28 +36,34 @@ class ProfileScreen extends StatelessWidget {
               // Profile Picture
               const TopArea(),
               const SizedBox(height: 16),
-              const Text(
+              Text(
                 'Emma Oliver',
                 style: TextStyle(
                   fontFamily: 'GiazaStencil',
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF75140C),
+                  color: Get.isDarkMode
+                      ? AppColor.cardColor
+                      : AppColor.splashBlueTittleColor,
                 ),
               ),
-              const SizedBox(height: 4),
               Text(
                 'emmaoliver@example.com',
                 style: TextStyle(
                   fontFamily: 'TTChocolates',
                   fontSize: 16,
-                  color: Colors.grey[600],
+                  color: theme.textTheme.bodyLarge!.color,
                 ),
               ),
-              const SizedBox(height: 8),
 
               // Profile Info Section
-              Divider(thickness: 1, color: Colors.grey[300]),
+              Divider(thickness: 0.1, color: theme.dividerColor),
+              ProfileItem(theme: theme, title: "edit_profile_key"),
+              const SizedBox(height: Dimensions.FREE_SIZE_SMALL),
+              ProfileItem(theme: theme, title: "edit_profile_key"),
+              const SizedBox(height: Dimensions.FREE_SIZE_SMALL),
+              ProfileItem(theme: theme, title: "edit_profile_key"),
+              const SizedBox(height: Dimensions.FREE_SIZE_LARGE),
               ListTile(
                 leading: const Icon(Icons.person, color: Color(0xFF75140C)),
                 title: const Text(
@@ -123,7 +125,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Divider(thickness: 1, color: Colors.grey[300]),
+              Divider(thickness: 0.1, color: theme.dividerColor),
 
               // Action Buttons
               ListTile(
@@ -177,44 +179,134 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-class TopArea extends StatelessWidget {
-  const TopArea({
+class ProfileItem extends StatelessWidget {
+  const ProfileItem({
     super.key,
+    required this.theme,
+    required this.title,
   });
+
+  final ThemeData theme;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    return const Stack(
-      children: [
-        CircleAvatar(
-          minRadius: 55,
-          maxRadius: 65,
-          backgroundColor: Color(0xFF75140C),
-          child: CircleAvatar(
-            minRadius: 50,
-            maxRadius: 60,
-            backgroundColor: Colors.grey,
-
-            // backgroundImage: AssetImage(
-            //     'assets/images/profile_placeholder.png'), // Replace with user image
-            backgroundImage: NetworkImage(
-                'https://images.pexels.com/photos/9366572/pexels-photo-9366572.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'), // Replace with user image
+    return Container(
+      padding: const EdgeInsets.only(
+        top: Dimensions.PADDING_SIZE_EXTRA_SMALL,
+        left: Dimensions.PADDING_SIZE_SMALL,
+        bottom: Dimensions.PADDING_SIZE_EXTRA_SMALL,
+      ),
+      decoration: BoxDecoration(
+        color: theme.cardColor,
+        borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_EXTRA_SMALL),
+            decoration: BoxDecoration(
+              color: theme.scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
+            ),
+            child: Center(
+              child: Icon(Icons.person_2_outlined, color: theme.primaryColor),
+            ),
           ),
-        ),
-        Positioned(
-            bottom: 8,
-            right: 6,
-            child: CircleAvatar(
-              radius: 15,
-              backgroundColor: Color(0xFF75140C),
-              child: Padding(
-                padding: EdgeInsets.all(2.0),
-                child: Icon(
-                  Icons.camera_alt_outlined,
-                  color: Colors.white,
+          const SizedBox(
+            width: Dimensions.FREE_SIZE_DEFAULT,
+          ),
+          Text(
+            title.tr,
+            style: bodyMediumText(context)!.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+              color: Get.isDarkMode
+                  ? AppColor.cardColor
+                  : AppColor.splashBlueTittleColor,
+            ),
+          ),
+          const Spacer(),
+          CustomIconButton(
+            iconSize: 18,
+            onPressed: () {},
+            iconName: Icons.arrow_forward_ios,
+            iconColor: theme.primaryColor,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class TopArea extends StatelessWidget {
+  const TopArea({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Stack(
+      children: [
+        // Frosted Glass Circle Container
+        ClipOval(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // blur level
+            child: Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: theme.primaryColor.withValues(alpha: 0.25), // glass tint
+                border: Border.all(
+                  color: Colors.white.withValues(alpha: 0.4),
+                  width: 2,
                 ),
               ),
-            )),
+              child: const CircleAvatar(
+                backgroundColor: Colors.transparent,
+                backgroundImage: NetworkImage(
+                    'https://images.pexels.com/photos/9366572/pexels-photo-9366572.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
+              ),
+            ),
+          ),
+        ),
+        // Camera Button with iOS Glass Effect
+        Positioned(
+          bottom: 0,
+          right: 0,
+          child: ClipOval(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+              child: Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: theme.cardColor.withValues(alpha: 0.25),
+                  border: Border.all(
+                    color: Get.isDarkMode
+                        ? AppColor.cardColor.withValues(alpha: 0.4)
+                        : theme.cardColor.withValues(alpha: 0.4),
+                    width: 1.5,
+                  ),
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 10,
+                      offset: Offset(0, 3),
+                      color: Colors.black12,
+                    )
+                  ],
+                ),
+                child: Icon(
+                  Icons.camera_alt_outlined,
+                  size: 18,
+                  color: Get.isDarkMode ? AppColor.cardColor : theme.cardColor,
+                ),
+              ),
+            ),
+          ),
+        )
       ],
     );
   }

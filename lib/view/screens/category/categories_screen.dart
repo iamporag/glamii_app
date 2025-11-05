@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../base/custom_app_bar.dart';
+
 class CategoriesScreen extends StatelessWidget {
   // Sample data for categories
   final List<Map<String, String>> categories = [
@@ -40,16 +42,9 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Categories',
-          style: TextStyle(
-            fontFamily: 'GiazaStencil',
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: const Color(0xFF75140C),
-        centerTitle: true,
+      appBar: const CustomAppBar(
+        title: 'Favorite',
+        isBackButtonExist: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
