@@ -21,10 +21,12 @@ class SplashScreen extends StatelessWidget {
     });
     final theme = Theme.of(context);
     return Scaffold(
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            const Spacer(),
             SvgPicture.asset(
 <<<<<<< HEAD
               Images.logo,
@@ -33,13 +35,12 @@ class SplashScreen extends StatelessWidget {
 >>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244
               width: 220,
             ),
-            const SizedBox(
-              height: Dimensions.FREE_SIZE_DEFAULT,
-            ),
+            const Spacer(),
             CircularProgressIndicator(
               strokeWidth: 3.0,
               color: theme.primaryColor,
             ),
+            const SizedBox(height: Dimensions.FREE_SIZE_EXTRA_LARGE),
           ],
         ),
       ),

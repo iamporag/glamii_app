@@ -13,14 +13,20 @@ ThemeData light = ThemeData(
 =======
   fontFamily: 'TTChocolates',
   primaryColor: AppColor.primary,
+<<<<<<< HEAD
   scaffoldBackgroundColor: const Color(0xFFF3F5F7),
   disabledColor: const Color(0xFFA0A4A8),
 >>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244
+=======
+  scaffoldBackgroundColor: const Color(0xFFF3F5F9),
+  disabledColor: const Color(0xFF7a7a7a),
+>>>>>>> 8f4ea7438f6ab5ecaa47d181f529c6cfae31952d
   indicatorColor: const Color(0xFFF3F5F7),
   brightness: Brightness.light,
-  hintColor: const Color(0xFF9F9F9F),
+  hintColor: const Color(0xFFA0A4A8),
   cardColor: const Color(0xFFFFFFFF),
   colorScheme: const ColorScheme.light(
+<<<<<<< HEAD
 <<<<<<< HEAD
     primary: Color(0xFF514DEC),
     secondary: Color(0xFF514DEC),
@@ -28,9 +34,15 @@ ThemeData light = ThemeData(
     primary: Color(0xFF232f3e),
     secondary: Color(0xFF232f3e),
 >>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244
+=======
+    primary: AppColor.primary,
+    secondary: AppColor.primary,
+>>>>>>> 8f4ea7438f6ab5ecaa47d181f529c6cfae31952d
     error: Color(0xFFE84D4F),
   ),
   primarySwatch: AppColor.primarySwatchValueColor,
+  useMaterial3: true,
+  splashFactory: NoSplash.splashFactory,
   textTheme: const TextTheme(
     displayLarge: TextStyle(
 <<<<<<< HEAD
@@ -68,40 +80,48 @@ ThemeData light = ThemeData(
 =======
       fontFamily: 'TTChocolates',
       fontSize: Dimensions.FONT_SIZE_OVER_LARGE,
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w700,
       color: Colors.black,
     ),
     displayMedium: TextStyle(
       fontFamily: 'TTChocolates',
       fontSize: Dimensions.FONT_SIZE_EXTRA_LARGE,
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w500,
       color: Colors.black87,
     ),
     bodyLarge: TextStyle(
       fontFamily: 'TTChocolates',
       fontSize: Dimensions.FONT_SIZE_LARGE,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.w500,
       color: Colors.black87,
     ),
     bodyMedium: TextStyle(
       fontFamily: 'TTChocolates',
       fontSize: Dimensions.FONT_SIZE_DEFAULT,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.w500,
       color: Colors.black54,
     ),
     bodySmall: TextStyle(
       fontFamily: 'TTChocolates',
       fontSize: Dimensions.FONT_SIZE_SMALL,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.w400,
       color: Colors.black45,
     ),
   ),
+<<<<<<< HEAD
 >>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244
 );
 
 class AppColor {
   static const Color primary = Color(0xFF75140c);
 <<<<<<< HEAD
+=======
+  iconTheme: const IconThemeData(color: Colors.black54),
+);
+
+class AppColor {
+  static const Color primary = Color(0xFF75140C);
+>>>>>>> 8f4ea7438f6ab5ecaa47d181f529c6cfae31952d
   static const Color deepBlackColor = Colors.black;
   static const Color blackColor = Colors.black87;
   static const Color blackMediumColor = Colors.black54;
@@ -168,7 +188,11 @@ class AppColor {
   static const Color whiteGreyBlue = Color(0xFFE5E9F3);
   static const Color darkOrangeColor = Color(0xFFFF7032);
 
+<<<<<<< HEAD
   static const int primarySwatchValue = 0xFF75140c;
+=======
+  static const int primarySwatchValue = 0xFF75140C;
+>>>>>>> 8f4ea7438f6ab5ecaa47d181f529c6cfae31952d
   static const MaterialColor primarySwatchValueColor = MaterialColor(
     primarySwatchValue,
     <int, Color>{
@@ -184,6 +208,7 @@ class AppColor {
       900: Color(primarySwatchValue),
     },
   );
+<<<<<<< HEAD
 =======
   static const int primarySwatchValue = 0xFF75140c;
   static const MaterialColor primarySwatchValueColor =
@@ -200,4 +225,6 @@ class AppColor {
     900: Color(primarySwatchValue),
   });
 >>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244
+=======
+>>>>>>> 8f4ea7438f6ab5ecaa47d181f529c6cfae31952d
 }

@@ -29,9 +29,13 @@ class RouteHelper {
 
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => const SplashScreen()),
+<<<<<<< HEAD
     GetPage(name: navbar, page: () => const Navbar()),
 <<<<<<< HEAD
 =======
+=======
+    GetPage(name: navbar, page: () => const NavigationBarScreen()),
+>>>>>>> 8f4ea7438f6ab5ecaa47d181f529c6cfae31952d
     GetPage(name: languageScreen, page: () => const LanguageScreen()),
 >>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244
   ];
