@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../util/dimensions.dart';
+import '../../base/custom_app_bar.dart';
 import '../appointment/appointment_detail_screen.dart';
 
 class CalendarScreen extends StatefulWidget {
@@ -72,16 +73,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Calendar',
-          style: TextStyle(
-            fontFamily: 'GiazaStencil',
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: const Color(0xFF75140C),
-        centerTitle: true,
+      appBar: const CustomAppBar(
+        title: 'Calendar',
+        isBackButtonExist: false,
       ),
       body: Column(
         children: [

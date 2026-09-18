@@ -1,0 +1,55 @@
+import 'package:flutter/material.dart';
+
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: SingleChildScrollView(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: const SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Login",
+                  style: TextStyle(
+                    fontSize: 32,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                customTextField(),
+                SizedBox(
+                  height: 20,
+                ),
+                customTextField(),
+                Text('Login'),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ));
+  }
+}
+
+class customTextField extends StatelessWidget {
+  const customTextField({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      decoration: const InputDecoration(
+        hintText: 'Email',
+        border: OutlineInputBorder(),
+      ),
+    );
+  }
+}

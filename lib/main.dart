@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
 import 'controller/localization_controller.dart';
 import 'controller/theme_controller.dart';
 import 'helper/get_di.dart' as di;
@@ -12,12 +16,11 @@ import 'util/messages.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-
   Map<String, Map<String, String>> languages = await di.init();
-
   runApp(MyApp(languages: languages));
 }
 
+// The main application widget.
 class MyApp extends StatelessWidget {
   final Map<String, Map<String, String>> languages;
   const MyApp({super.key, required this.languages});
@@ -36,13 +39,41 @@ class MyApp extends StatelessWidget {
               locale: localizeController.locale,
               initialRoute: RouteHelper.getInitialRoute(),
               getPages: RouteHelper.routes,
-              defaultTransition: Transition.topLevel,
+              defaultTransition: Transition.rightToLeftWithFade,
               translations: Messages(languages: languages),
-              fallbackLocale: Locale(
-                AppConstants.languages[0].languageCode!,
-                AppConstants.languages[0].countryCode,
-              ),
+              fallbackLocale: Locale(AppConstants.languages[0].languageCode!,
+                  AppConstants.languages[0].countryCode),
               transitionDuration: const Duration(milliseconds: 500),
+              builder: (context, child) {
+                final theme = Theme.of(context);
+                final isDark = theme.brightness == Brightness.dark;
+<<<<<<< HEAD
+                return AnnotatedRegion<SystemUiOverlayStyle>(
+                  value: SystemUiOverlayStyle(
+                    systemNavigationBarColor: theme.cardColor,
+=======
+
+                return AnnotatedRegion<SystemUiOverlayStyle>(
+                  value: SystemUiOverlayStyle(
+                    statusBarColor: Colors.transparent,
+                    statusBarIconBrightness:
+                        isDark ? Brightness.light : Brightness.dark,
+                    systemNavigationBarColor: theme.scaffoldBackgroundColor,
+>>>>>>> 8f4ea7438f6ab5ecaa47d181f529c6cfae31952d
+                    systemNavigationBarIconBrightness:
+                        isDark ? Brightness.light : Brightness.dark,
+                  ),
+                  child: SafeArea(
+                    top: false,
+<<<<<<< HEAD
+                    bottom: true,
+=======
+                    bottom: Platform.isAndroid,
+>>>>>>> 8f4ea7438f6ab5ecaa47d181f529c6cfae31952d
+                    child: child!,
+                  ),
+                );
+              },
             );
           },
         );

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class CustomIconButton extends StatelessWidget {
-  final Icon? iconName;
+  final IconData? iconName;
   final void Function() onPressed;
   final Color? iconColor;
   final double? iconSize;
@@ -32,7 +32,7 @@ class CustomIconButton extends StatelessWidget {
               width: iconSize,
             )
           : Icon(
-              Icons.dark_mode_outlined,
+              iconName,
               color: iconColor ?? Theme.of(context).indicatorColor,
               size: iconSize,
             ),

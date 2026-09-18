@@ -180,6 +180,18 @@ class ProviderBusinessPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF75140C),
                     ),
+<<<<<<< HEAD:lib/src/presentation/screens/provider_business_page.dart
+                  ),
+                  subtitle: Text(
+                    providerInfo['description']!,
+                    style: const TextStyle(
+                      fontFamily: 'TTChocolates',
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+=======
                   ),
                   subtitle: Text(
                     providerInfo['description']!,
@@ -191,11 +203,16 @@ class ProviderBusinessPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: Dimensions.FREE_SIZE_DEFAULT),
+>>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244:lib/view/screens/provider/provider_business_page.dart
                 // Available Services
                 const TitleWidget(title: "Available Services"),
                 const SizedBox(height: Dimensions.FREE_SIZE_SMALL),
                 FeatureServiceArea(featuredServices: featuredServices),
+<<<<<<< HEAD:lib/src/presentation/screens/provider_business_page.dart
+
+=======
                 const SizedBox(height: Dimensions.FREE_SIZE_DEFAULT),
+>>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244:lib/view/screens/provider/provider_business_page.dart
                 // Contact Information
                 const TitleWidget(
                   title: 'Contact Information',
@@ -224,7 +241,11 @@ class ProviderBusinessPage extends StatelessWidget {
                     ),
                   ),
                 ),
+<<<<<<< HEAD:lib/src/presentation/screens/provider_business_page.dart
+
+=======
                 const SizedBox(height: Dimensions.FREE_SIZE_DEFAULT),
+>>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244:lib/view/screens/provider/provider_business_page.dart
                 // Customer Reviews
                 const TitleWidget(
                   title: 'Customer Reviews',
