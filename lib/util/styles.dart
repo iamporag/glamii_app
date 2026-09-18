@@ -20,6 +20,7 @@ TextStyle? bodySmallText(BuildContext context) {
   return Theme.of(context).textTheme.bodySmall;
 }
 
+<<<<<<< HEAD
 
 String dotStringText(String text, {int maxLength = 17}) {
   return text.length > maxLength ? '${text.substring(0, maxLength)}...' : text;
@@ -28,3 +29,28 @@ String dotStringText(String text, {int maxLength = 17}) {
 String dotAmountText(String text, {int maxLength = 8}) {
   return text.length > maxLength ? '${text.substring(0, maxLength)}...' : text;
 }
+=======
+// regular font styles
+const giazaStencilRegular = TextStyle(
+  fontFamily: 'GiazaStencil',
+  fontWeight: FontWeight.w400,
+);
+
+// medium font styles
+const giazaStencilMedium = TextStyle(
+  fontFamily: 'GiazaStencil',
+  fontWeight: FontWeight.w500,
+);
+
+// bold font styles
+const giazaStencilBold = TextStyle(
+  fontFamily: 'GiazaStencil',
+  fontWeight: FontWeight.w700,
+);
+
+// black font styles
+const giazaStencilBlack = TextStyle(
+  fontFamily: 'GiazaStencil',
+  fontWeight: FontWeight.w900,
+);
+>>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244

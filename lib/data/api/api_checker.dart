@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import 'package:get/get.dart';
 
 // import '../../helper/route_helper.dart';
@@ -21,3 +22,19 @@
 //     }
 //   }
 // }
+=======
+
+import 'package:get/get.dart';
+
+class ApiChecker {
+  static void checkApi(Response response) {
+    if (response.statusCode == 401) {
+      // Get.find<AuthController>().clearSharedData();
+      // Get.offAllNamed(RouteHelper.getSignInRoute());
+    } else {
+      // print(response.statusText);
+      // showCustomSnackBar(response.statusText);
+    }
+  }
+}
+>>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244

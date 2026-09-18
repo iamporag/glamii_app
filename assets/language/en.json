@@ -4,6 +4,7 @@
    "get_started": "Get Started!",
   "welcome": "Welcome in your new project",
   "thanks_for_click": "Thanks for click",
+<<<<<<< HEAD
   "welcome_page": "Welcome Page",
   "or_key": "Or",
   "login_key": "Login",
@@ -344,4 +345,7 @@
   "end_date_required_key": "End date is required",
   "end_time_required_key": "End time is required",
   "description_required_key": "Description is required"
+=======
+  "welcome_page": "Welcome Page"
+>>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244
 }

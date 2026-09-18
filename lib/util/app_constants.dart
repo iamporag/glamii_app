@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+<<<<<<< HEAD
 import '../data/response/language_model.dart';
 import 'images.dart';
 
@@ -104,11 +105,40 @@ class AppConstants {
   static List<LanguageModel> languages = [
     LanguageModel(
         imageUrl: Images.email_icon,
+=======
+import '../data/model/response/language_model.dart';
+import 'images.dart';
+
+class AppConstants {
+  static const String APP_NAME = 'Glamii';
+  static const double APP_VERSION = 1.0;
+
+  // BASE URL LINK
+  static const String BASE_URL = 'https://dev.logiclabpro.xyz/api/';
+
+  // Shared Key
+  static const String THEME = 'theme';
+  static const String LOCALIZATION_KEY = 'X-localization';
+  static const String TOKEN = 'token';
+
+  // Language Key
+  static const String LANGUAGE_CODE = 'language_code';
+  static const String COUNTRY_CODE = 'country_code';
+
+  // Laguage section
+  static List<LanguageModel> languages = [
+    LanguageModel(
+        imageUrl: Images.english_language,
+>>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244
         languageName: 'English',
         countryCode: 'US',
         languageCode: 'en'),
     LanguageModel(
+<<<<<<< HEAD
         imageUrl: Images.email_icon,
+=======
+        imageUrl: Images.arabic_language,
+>>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244
         languageName: 'Arabic',
         countryCode: 'SA',
         languageCode: 'ar'),

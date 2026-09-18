@@ -2,10 +2,17 @@
 
 import 'package:flutter/material.dart';
 
+<<<<<<< HEAD
 import '../../src/presentation/screens/calendar_screen.dart';
 import '../../src/presentation/screens/categories_screen.dart';
 import '../../src/presentation/screens/profile_screen.dart';
 import '../../widgets/featured_services_screen.dart';
+=======
+import '../screens/calendar/calendar_screen.dart';
+import '../screens/category/categories_screen.dart';
+import '../screens/feature_service/featured_services_screen.dart';
+import '../screens/profile/profile_screen.dart';
+>>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244
 
 class Navbar extends StatefulWidget {
   const Navbar({super.key});

@@ -1,6 +1,7 @@
 name: glamii_app
 description: "A new Flutter project."
 publish_to: 'none' 
+publish_to: 'none' 
 version: 1.0.0+1
 
 environment:
@@ -19,6 +20,10 @@ dependencies:
   get: ^4.7.2
   shared_preferences: ^2.5.3
   image_picker: ^1.2.0
+  flutter_svg: ^2.2.1
+  get: ^4.7.2
+  shared_preferences: ^2.5.3
+  image_picker: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -33,7 +38,7 @@ flutter:
   assets:
      - assets/
      - assets/image/
-     - assets/icon/
+     - assets/icons/
      - assets/language/
      - assets/notification.mp3
 

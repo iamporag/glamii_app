@@ -5,22 +5,35 @@ import 'package:flutter/material.dart';
 import '../util/dimensions.dart';
 
 ThemeData light = ThemeData(
+<<<<<<< HEAD
   fontFamily: 'TT Chocolates',
   primaryColor: AppColor.primary,
   scaffoldBackgroundColor: const Color(0xFFF7F9FC),
   disabledColor: const Color(0xFF505867),
+=======
+  fontFamily: 'TTChocolates',
+  primaryColor: AppColor.primary,
+  scaffoldBackgroundColor: const Color(0xFFF3F5F7),
+  disabledColor: const Color(0xFFA0A4A8),
+>>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244
   indicatorColor: const Color(0xFFF3F5F7),
   brightness: Brightness.light,
   hintColor: const Color(0xFF9F9F9F),
   cardColor: const Color(0xFFFFFFFF),
   colorScheme: const ColorScheme.light(
+<<<<<<< HEAD
     primary: Color(0xFF514DEC),
     secondary: Color(0xFF514DEC),
+=======
+    primary: Color(0xFF232f3e),
+    secondary: Color(0xFF232f3e),
+>>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244
     error: Color(0xFFE84D4F),
   ),
   primarySwatch: AppColor.primarySwatchValueColor,
   textTheme: const TextTheme(
     displayLarge: TextStyle(
+<<<<<<< HEAD
       fontFamily: 'Giaza Stencil',
       fontSize: Dimensions.FONT_SIZE_OVER_LARGE,
       fontWeight: FontWeight.w700,
@@ -52,10 +65,43 @@ ThemeData light = ThemeData(
     ),
   ),
   iconTheme: const IconThemeData(color: Colors.black54),
+=======
+      fontFamily: 'TTChocolates',
+      fontSize: Dimensions.FONT_SIZE_OVER_LARGE,
+      fontWeight: FontWeight.bold,
+      color: Colors.black,
+    ),
+    displayMedium: TextStyle(
+      fontFamily: 'TTChocolates',
+      fontSize: Dimensions.FONT_SIZE_EXTRA_LARGE,
+      fontWeight: FontWeight.bold,
+      color: Colors.black87,
+    ),
+    bodyLarge: TextStyle(
+      fontFamily: 'TTChocolates',
+      fontSize: Dimensions.FONT_SIZE_LARGE,
+      fontWeight: FontWeight.normal,
+      color: Colors.black87,
+    ),
+    bodyMedium: TextStyle(
+      fontFamily: 'TTChocolates',
+      fontSize: Dimensions.FONT_SIZE_DEFAULT,
+      fontWeight: FontWeight.normal,
+      color: Colors.black54,
+    ),
+    bodySmall: TextStyle(
+      fontFamily: 'TTChocolates',
+      fontSize: Dimensions.FONT_SIZE_SMALL,
+      fontWeight: FontWeight.normal,
+      color: Colors.black45,
+    ),
+  ),
+>>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244
 );
 
 class AppColor {
   static const Color primary = Color(0xFF75140c);
+<<<<<<< HEAD
   static const Color deepBlackColor = Colors.black;
   static const Color blackColor = Colors.black87;
   static const Color blackMediumColor = Colors.black54;
@@ -138,4 +184,20 @@ class AppColor {
       900: Color(primarySwatchValue),
     },
   );
+=======
+  static const int primarySwatchValue = 0xFF75140c;
+  static const MaterialColor primarySwatchValueColor =
+      MaterialColor(primarySwatchValue, <int, Color>{
+    50: Color(primarySwatchValue),
+    100: Color(primarySwatchValue),
+    200: Color(primarySwatchValue),
+    300: Color(primarySwatchValue),
+    400: Color(primarySwatchValue),
+    500: Color(primarySwatchValue),
+    600: Color(primarySwatchValue),
+    700: Color(primarySwatchValue),
+    800: Color(primarySwatchValue),
+    900: Color(primarySwatchValue),
+  });
+>>>>>>> dcfb046afcba923fb6c5217705a6664c3e369244
 }
